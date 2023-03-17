@@ -55,20 +55,7 @@ contract BondToken is ERC1363, IERC1363Receiver {
     /// @dev burns `bondAmount` tokens from msg.sender's balance
     /// @param bondAmount Amount of tokens to `sell`
     function sell(uint256 bondAmount) external {
-        require(bondAmount > 0, "BOND: must be non-zero");
-
-        uint256 refundAmount = BondCurve.calculateWei(
-            bondAmount,
-            balance,
-            totalSupply()
-        );
-        balance -= refundAmount;
-        _burn(msg.sender, bondAmount);
-
-        // finally transfer the amount
-        payable(msg.sender).transfer(refundAmount);
-
-        emit Sell(bondAmount, refundAmount);
+        _sell(msg.sender, bondAmount);
     }
 
     /// @dev Internal function to `buy` BOND
@@ -90,6 +77,27 @@ contract BondToken is ERC1363, IERC1363Receiver {
         emit Buy(deposit, bondAmount);
     }
 
+    /// @dev Internal function to `sell` BOND
+    /// @dev emits `Sell(bondSold, weiReceived)`
+    /// @param seller The address who's selling tokens
+    /// @param bondAmount The amount of tokens being sold
+    function _sell(address seller, uint bondAmount) private {
+        require(bondAmount > 0, "BOND: must be non-zero");
+
+        uint256 refundAmount = BondCurve.calculateWei(
+            bondAmount,
+            balance,
+            totalSupply()
+        );
+        balance -= refundAmount;
+        _burn(seller, bondAmount);
+
+        // finally transfer the amount
+        payable(msg.sender).transfer(refundAmount);
+
+        emit Sell(bondAmount, refundAmount);
+    }
+
     /// @notice Gets the price of `bondAmount` tokens in wei
     /// @param bondAmount Amount of BOND tokens to fetch the price of
     /// @return price The amount of wei to be paid for `bondAmount` tokens
@@ -97,27 +105,29 @@ contract BondToken is ERC1363, IERC1363Receiver {
         price = BondCurve.calculateWei(bondAmount, balance, totalSupply());
     }
 
-    /// @notice Users can buy BOND by directly sending wei
-    receive() external payable {
-        _buy(msg.value);
-    }
-
     /// @dev See {ERC20-decimals}
     function decimals() public view virtual override returns (uint8) {
         return 6;
     }
 
+    /// @notice Users can buy BOND by directly sending wei
+    receive() external payable {
+        _buy(msg.value);
+    }
+
+    /// @notice Repays the spender for `amount` BOND
     /// @dev See {IERC1363Receiver-onTransferReceived}
-    /// @notice rejects any tokens sent because it's unsafe to repay msg.sender
-    /// on the assumption that he's trying to sell off his BOND tokens because
-    /// the `amount` might not always refer to the amount of BOND, as this function
-    /// could be called by sending any ERC1363 token via `transferAndCall` to this contract
+    /// @dev Note: remember that the token contract address is always the message sender.
     function onTransferReceived(
         address spender,
         address sender,
         uint256 amount,
         bytes calldata data
     ) external override returns (bytes4) {
-        revert("BOND: cannot receive tokens");
+        require(sender == address(this), "BOND: must be Bond Tokens");
+
+        _sell(spender, amount);
+
+        return IERC1363Receiver.onTransferReceived.selector;
     }
 }
