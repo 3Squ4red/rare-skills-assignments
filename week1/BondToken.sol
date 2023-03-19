@@ -117,14 +117,14 @@ contract BondToken is ERC1363, IERC1363Receiver {
 
     /// @notice Repays the spender for `amount` BOND
     /// @dev See {IERC1363Receiver-onTransferReceived}
-    /// @dev Note: remember that the token contract address is always the message sender.
+    /// @dev Note: remember that the token contract address is always the msg.sender.
     function onTransferReceived(
         address spender,
         address sender,
         uint256 amount,
         bytes calldata data
     ) external override returns (bytes4) {
-        require(sender == address(this), "BOND: must be Bond Tokens");
+        require(msg.sender == address(this), "BOND: must be Bond Tokens");
 
         _sell(spender, amount);
 
