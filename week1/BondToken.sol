@@ -34,7 +34,7 @@ library BondCurve {
     }
 }
 
-contract BondToken is ERC1363, IERC1363Receiver {
+contract BondToken is ERC1363 {
     event Buy(uint256 weiPaid, uint256 bondReceived);
     event Sell(uint256 bondSold, uint256 weiReceived);
 
@@ -81,7 +81,7 @@ contract BondToken is ERC1363, IERC1363Receiver {
     /// @dev emits `Sell(bondSold, weiReceived)`
     /// @param seller The address who's selling tokens
     /// @param bondAmount The amount of tokens being sold
-    function _sell(address seller, uint bondAmount) private {
+    function _sell(address seller, uint256 bondAmount) private {
         require(bondAmount > 0, "BOND: must be non-zero");
 
         uint256 refundAmount = BondCurve.calculateWei(
@@ -115,19 +115,16 @@ contract BondToken is ERC1363, IERC1363Receiver {
         _buy(msg.value);
     }
 
+    
     /// @notice Repays the spender for `amount` BOND
-    /// @dev See {IERC1363Receiver-onTransferReceived}
-    /// @dev Note: remember that the token contract address is always the msg.sender.
-    function onTransferReceived(
-        address spender,
-        address sender,
-        uint256 amount,
-        bytes calldata data
-    ) external override returns (bytes4) {
-        require(msg.sender == address(this), "BOND: must be Bond Tokens");
-
-        _sell(spender, amount);
-
-        return IERC1363Receiver.onTransferReceived.selector;
+    /// @dev See {ERC20-_afterTokenTransfer}
+    function _afterTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual override {
+        if (to == address(this)) {
+            _sell(from, amount);
+        }
     }
 }
