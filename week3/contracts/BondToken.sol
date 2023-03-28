@@ -72,9 +72,10 @@ contract BondToken is ERC1363 {
         // revert if the no. of BOND user will get is 0
         if (bondAmount == 0) revert ZeroMintError(getPrice(1));
         balance += deposit;
-        _mint(msg.sender, bondAmount);
 
         emit Buy(deposit, bondAmount);
+
+        _mint(msg.sender, bondAmount);
     }
 
     /// @dev Internal function to `sell` BOND
@@ -90,12 +91,13 @@ contract BondToken is ERC1363 {
             totalSupply()
         );
         balance -= refundAmount;
-        _burn(seller, bondAmount);
-
-        // finally transfer the amount
-        payable(msg.sender).transfer(refundAmount);
 
         emit Sell(bondAmount, refundAmount);
+
+        _burn(seller, bondAmount);
+        
+        // finally transfer the amount
+        payable(msg.sender).transfer(refundAmount);
     }
 
     /// @notice Gets the price of `bondAmount` tokens in wei
