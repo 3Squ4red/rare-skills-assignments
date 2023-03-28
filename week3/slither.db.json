@@ -1,0 +1,1762 @@
+[
+  {
+    "elements": [
+      {
+        "type": "function",
+        "name": "getClaimReward",
+        "source_mapping": {
+          "start": 2350,
+          "length": 701,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [
+            66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82
+          ],
+          "starting_column": 5,
+          "ending_column": 6
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "contract",
+            "name": "StakeGame",
+            "source_mapping": {
+              "start": 250,
+              "length": 4285,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+                26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+                74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+                90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+                105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116
+              ],
+              "starting_column": 1,
+              "ending_column": 2
+            }
+          },
+          "signature": "getClaimReward(uint256)"
+        }
+      },
+      {
+        "type": "node",
+        "name": "claimTimes = (_now - lastTime) / CLAIM_INTERVAL",
+        "source_mapping": {
+          "start": 2690,
+          "length": 55,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [74],
+          "starting_column": 9,
+          "ending_column": 64
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "getClaimReward",
+            "source_mapping": {
+              "start": 2350,
+              "length": 701,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81,
+                82
+              ],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "StakeGame",
+                "source_mapping": {
+                  "start": 250,
+                  "length": 4285,
+                  "filename_relative": "contracts/Staking/StakeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+                  "filename_short": "contracts/Staking/StakeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                    55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                    70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+                    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                    112, 113, 114, 115, 116
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "getClaimReward(uint256)"
+            }
+          }
+        }
+      },
+      {
+        "type": "node",
+        "name": "tokenReward = claimTimes * CLAIM_REWARD * 10 ** stakeCoin.decimals()",
+        "source_mapping": {
+          "start": 2947,
+          "length": 68,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [80],
+          "starting_column": 9,
+          "ending_column": 77
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "getClaimReward",
+            "source_mapping": {
+              "start": 2350,
+              "length": 701,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81,
+                82
+              ],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "StakeGame",
+                "source_mapping": {
+                  "start": 250,
+                  "length": 4285,
+                  "filename_relative": "contracts/Staking/StakeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+                  "filename_short": "contracts/Staking/StakeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                    55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                    70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+                    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                    112, 113, 114, 115, 116
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "getClaimReward(uint256)"
+            }
+          }
+        }
+      }
+    ],
+    "description": "StakeGame.getClaimReward(uint256) (contracts/Staking/StakeGame.sol#66-82) performs a multiplication on the result of a division:\n\t- claimTimes = (_now - lastTime) / CLAIM_INTERVAL (contracts/Staking/StakeGame.sol#74)\n\t- tokenReward = claimTimes * CLAIM_REWARD * 10 ** stakeCoin.decimals() (contracts/Staking/StakeGame.sol#80)\n",
+    "markdown": "[StakeGame.getClaimReward(uint256)](contracts/Staking/StakeGame.sol#L66-L82) performs a multiplication on the result of a division:\n\t- [claimTimes = (_now - lastTime) / CLAIM_INTERVAL](contracts/Staking/StakeGame.sol#L74)\n\t- [tokenReward = claimTimes * CLAIM_REWARD * 10 ** stakeCoin.decimals()](contracts/Staking/StakeGame.sol#L80)\n",
+    "first_markdown_element": "contracts/Staking/StakeGame.sol#L66-L82",
+    "id": "5d89cbeac1eb06b86db95bc8e7ca9e2af02771947286c62f5a56194754ea6762",
+    "check": "divide-before-multiply",
+    "impact": "Medium",
+    "confidence": "Medium"
+  },
+  {
+    "elements": [
+      {
+        "type": "function",
+        "name": "claim",
+        "source_mapping": {
+          "start": 3417,
+          "length": 415,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
+          "starting_column": 5,
+          "ending_column": 6
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "contract",
+            "name": "StakeGame",
+            "source_mapping": {
+              "start": 250,
+              "length": 4285,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+                26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+                74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+                90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+                105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116
+              ],
+              "starting_column": 1,
+              "ending_column": 2
+            }
+          },
+          "signature": "claim(uint256)"
+        }
+      },
+      {
+        "type": "node",
+        "name": "claimReward == 0",
+        "source_mapping": {
+          "start": 3576,
+          "length": 16,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [92],
+          "starting_column": 13,
+          "ending_column": 29
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "claim",
+            "source_mapping": {
+              "start": 3417,
+              "length": 415,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "StakeGame",
+                "source_mapping": {
+                  "start": 250,
+                  "length": 4285,
+                  "filename_relative": "contracts/Staking/StakeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+                  "filename_short": "contracts/Staking/StakeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                    55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                    70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+                    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                    112, 113, 114, 115, 116
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "claim(uint256)"
+            }
+          }
+        }
+      }
+    ],
+    "description": "StakeGame.claim(uint256) (contracts/Staking/StakeGame.sol#89-99) uses a dangerous strict equality:\n\t- claimReward == 0 (contracts/Staking/StakeGame.sol#92)\n",
+    "markdown": "[StakeGame.claim(uint256)](contracts/Staking/StakeGame.sol#L89-L99) uses a dangerous strict equality:\n\t- [claimReward == 0](contracts/Staking/StakeGame.sol#L92)\n",
+    "first_markdown_element": "contracts/Staking/StakeGame.sol#L89-L99",
+    "id": "628796a32a4ae8ef4387fcf567b5d909cd57b152f62c71f2a4398cead8eab814",
+    "check": "incorrect-equality",
+    "impact": "Medium",
+    "confidence": "High"
+  },
+  {
+    "elements": [
+      {
+        "type": "function",
+        "name": "getClaimReward",
+        "source_mapping": {
+          "start": 2350,
+          "length": 701,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [
+            66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82
+          ],
+          "starting_column": 5,
+          "ending_column": 6
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "contract",
+            "name": "StakeGame",
+            "source_mapping": {
+              "start": 250,
+              "length": 4285,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+                26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+                74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+                90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+                105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116
+              ],
+              "starting_column": 1,
+              "ending_column": 2
+            }
+          },
+          "signature": "getClaimReward(uint256)"
+        }
+      },
+      {
+        "type": "node",
+        "name": "lastTime == 0",
+        "source_mapping": {
+          "start": 2541,
+          "length": 13,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [70],
+          "starting_column": 13,
+          "ending_column": 26
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "getClaimReward",
+            "source_mapping": {
+              "start": 2350,
+              "length": 701,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81,
+                82
+              ],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "StakeGame",
+                "source_mapping": {
+                  "start": 250,
+                  "length": 4285,
+                  "filename_relative": "contracts/Staking/StakeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+                  "filename_short": "contracts/Staking/StakeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                    55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                    70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+                    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                    112, 113, 114, 115, 116
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "getClaimReward(uint256)"
+            }
+          }
+        }
+      }
+    ],
+    "description": "StakeGame.getClaimReward(uint256) (contracts/Staking/StakeGame.sol#66-82) uses a dangerous strict equality:\n\t- lastTime == 0 (contracts/Staking/StakeGame.sol#70)\n",
+    "markdown": "[StakeGame.getClaimReward(uint256)](contracts/Staking/StakeGame.sol#L66-L82) uses a dangerous strict equality:\n\t- [lastTime == 0](contracts/Staking/StakeGame.sol#L70)\n",
+    "first_markdown_element": "contracts/Staking/StakeGame.sol#L66-L82",
+    "id": "4d666eae5e4d3d1f66157e59598b3191bb619955a04ccd85f0ca6e32d8e3676c",
+    "check": "incorrect-equality",
+    "impact": "Medium",
+    "confidence": "High"
+  },
+  {
+    "elements": [
+      {
+        "type": "function",
+        "name": "getClaimReward",
+        "source_mapping": {
+          "start": 2350,
+          "length": 701,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [
+            66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82
+          ],
+          "starting_column": 5,
+          "ending_column": 6
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "contract",
+            "name": "StakeGame",
+            "source_mapping": {
+              "start": 250,
+              "length": 4285,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+                26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+                74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+                90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+                105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116
+              ],
+              "starting_column": 1,
+              "ending_column": 2
+            }
+          },
+          "signature": "getClaimReward(uint256)"
+        }
+      },
+      {
+        "type": "node",
+        "name": "claimTimes == 0",
+        "source_mapping": {
+          "start": 2815,
+          "length": 15,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [77],
+          "starting_column": 13,
+          "ending_column": 28
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "getClaimReward",
+            "source_mapping": {
+              "start": 2350,
+              "length": 701,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81,
+                82
+              ],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "StakeGame",
+                "source_mapping": {
+                  "start": 250,
+                  "length": 4285,
+                  "filename_relative": "contracts/Staking/StakeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+                  "filename_short": "contracts/Staking/StakeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                    55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                    70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+                    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                    112, 113, 114, 115, 116
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "getClaimReward(uint256)"
+            }
+          }
+        }
+      }
+    ],
+    "description": "StakeGame.getClaimReward(uint256) (contracts/Staking/StakeGame.sol#66-82) uses a dangerous strict equality:\n\t- claimTimes == 0 (contracts/Staking/StakeGame.sol#77)\n",
+    "markdown": "[StakeGame.getClaimReward(uint256)](contracts/Staking/StakeGame.sol#L66-L82) uses a dangerous strict equality:\n\t- [claimTimes == 0](contracts/Staking/StakeGame.sol#L77)\n",
+    "first_markdown_element": "contracts/Staking/StakeGame.sol#L66-L82",
+    "id": "7ed7aa07bf2410dd62fe5eda2021fc3b24ad4397d27c01aab388d3816a18ec42",
+    "check": "incorrect-equality",
+    "impact": "Medium",
+    "confidence": "High"
+  },
+  {
+    "elements": [
+      {
+        "type": "function",
+        "name": "getTokenIds",
+        "source_mapping": {
+          "start": 509,
+          "length": 282,
+          "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+          "filename_short": "contracts/Enumerable/PrimeGame.sol",
+          "is_dependency": false,
+          "lines": [17, 18, 19, 20, 21, 22, 23, 24],
+          "starting_column": 5,
+          "ending_column": 6
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "contract",
+            "name": "PrimeGame",
+            "source_mapping": {
+              "start": 143,
+              "length": 1654,
+              "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+              "filename_short": "contracts/Enumerable/PrimeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
+                39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
+              ],
+              "starting_column": 1,
+              "ending_column": 2
+            }
+          },
+          "signature": "getTokenIds(address)"
+        }
+      },
+      {
+        "type": "node",
+        "name": "ids.push(nft.tokenOfOwnerByIndex(user,i))",
+        "source_mapping": {
+          "start": 709,
+          "length": 42,
+          "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+          "filename_short": "contracts/Enumerable/PrimeGame.sol",
+          "is_dependency": false,
+          "lines": [21],
+          "starting_column": 13,
+          "ending_column": 55
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "getTokenIds",
+            "source_mapping": {
+              "start": 509,
+              "length": 282,
+              "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+              "filename_short": "contracts/Enumerable/PrimeGame.sol",
+              "is_dependency": false,
+              "lines": [17, 18, 19, 20, 21, 22, 23, 24],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "PrimeGame",
+                "source_mapping": {
+                  "start": 143,
+                  "length": 1654,
+                  "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+                  "filename_short": "contracts/Enumerable/PrimeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+                    22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                    37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "getTokenIds(address)"
+            }
+          }
+        }
+      }
+    ],
+    "description": "PrimeGame.getTokenIds(address) (contracts/Enumerable/PrimeGame.sol#17-24) has external calls inside a loop: ids.push(nft.tokenOfOwnerByIndex(user,i)) (contracts/Enumerable/PrimeGame.sol#21)\n",
+    "markdown": "[PrimeGame.getTokenIds(address)](contracts/Enumerable/PrimeGame.sol#L17-L24) has external calls inside a loop: [ids.push(nft.tokenOfOwnerByIndex(user,i))](contracts/Enumerable/PrimeGame.sol#L21)\n",
+    "first_markdown_element": "contracts/Enumerable/PrimeGame.sol#L17-L24",
+    "id": "cc6db2f964b38d622e208ee46a20642d2b435d5062971b543438259b6e519d69",
+    "check": "calls-loop",
+    "impact": "Low",
+    "confidence": "Medium"
+  },
+  {
+    "elements": [
+      {
+        "type": "function",
+        "name": "getItems",
+        "source_mapping": {
+          "start": 1107,
+          "length": 267,
+          "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+          "filename_short": "contracts/Enumerable/PrimeGame.sol",
+          "is_dependency": false,
+          "lines": [30, 31, 32, 33, 34, 35, 36],
+          "starting_column": 5,
+          "ending_column": 6
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "contract",
+            "name": "PrimeGame",
+            "source_mapping": {
+              "start": 143,
+              "length": 1654,
+              "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+              "filename_short": "contracts/Enumerable/PrimeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+                23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38,
+                39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
+              ],
+              "starting_column": 1,
+              "ending_column": 2
+            }
+          },
+          "signature": "getItems(address)"
+        }
+      },
+      {
+        "type": "node",
+        "name": "isPrime(nft.tokenOfOwnerByIndex(user,i))",
+        "source_mapping": {
+          "start": 1288,
+          "length": 41,
+          "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+          "filename_short": "contracts/Enumerable/PrimeGame.sol",
+          "is_dependency": false,
+          "lines": [33],
+          "starting_column": 16,
+          "ending_column": 57
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "getItems",
+            "source_mapping": {
+              "start": 1107,
+              "length": 267,
+              "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+              "filename_short": "contracts/Enumerable/PrimeGame.sol",
+              "is_dependency": false,
+              "lines": [30, 31, 32, 33, 34, 35, 36],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "PrimeGame",
+                "source_mapping": {
+                  "start": 143,
+                  "length": 1654,
+                  "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+                  "filename_short": "contracts/Enumerable/PrimeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
+                    22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36,
+                    37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "getItems(address)"
+            }
+          }
+        }
+      }
+    ],
+    "description": "PrimeGame.getItems(address) (contracts/Enumerable/PrimeGame.sol#30-36) has external calls inside a loop: isPrime(nft.tokenOfOwnerByIndex(user,i)) (contracts/Enumerable/PrimeGame.sol#33)\n",
+    "markdown": "[PrimeGame.getItems(address)](contracts/Enumerable/PrimeGame.sol#L30-L36) has external calls inside a loop: [isPrime(nft.tokenOfOwnerByIndex(user,i))](contracts/Enumerable/PrimeGame.sol#L33)\n",
+    "first_markdown_element": "contracts/Enumerable/PrimeGame.sol#L30-L36",
+    "id": "ec703e59ebc265c8d7173cacd94ea8ca5dd2cd9779e7ab437ce213b86e7bbdaa",
+    "check": "calls-loop",
+    "impact": "Low",
+    "confidence": "Medium"
+  },
+  {
+    "elements": [
+      {
+        "type": "function",
+        "name": "getClaimReward",
+        "source_mapping": {
+          "start": 2350,
+          "length": 701,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [
+            66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82
+          ],
+          "starting_column": 5,
+          "ending_column": 6
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "contract",
+            "name": "StakeGame",
+            "source_mapping": {
+              "start": 250,
+              "length": 4285,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+                26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+                74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+                90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+                105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116
+              ],
+              "starting_column": 1,
+              "ending_column": 2
+            }
+          },
+          "signature": "getClaimReward(uint256)"
+        }
+      },
+      {
+        "type": "node",
+        "name": "lastTime == 0",
+        "source_mapping": {
+          "start": 2541,
+          "length": 13,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [70],
+          "starting_column": 13,
+          "ending_column": 26
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "getClaimReward",
+            "source_mapping": {
+              "start": 2350,
+              "length": 701,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81,
+                82
+              ],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "StakeGame",
+                "source_mapping": {
+                  "start": 250,
+                  "length": 4285,
+                  "filename_relative": "contracts/Staking/StakeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+                  "filename_short": "contracts/Staking/StakeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                    55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                    70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+                    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                    112, 113, 114, 115, 116
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "getClaimReward(uint256)"
+            }
+          }
+        }
+      },
+      {
+        "type": "node",
+        "name": "claimTimes == 0",
+        "source_mapping": {
+          "start": 2815,
+          "length": 15,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [77],
+          "starting_column": 13,
+          "ending_column": 28
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "getClaimReward",
+            "source_mapping": {
+              "start": 2350,
+              "length": 701,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81,
+                82
+              ],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "StakeGame",
+                "source_mapping": {
+                  "start": 250,
+                  "length": 4285,
+                  "filename_relative": "contracts/Staking/StakeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+                  "filename_short": "contracts/Staking/StakeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                    55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                    70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+                    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                    112, 113, 114, 115, 116
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "getClaimReward(uint256)"
+            }
+          }
+        }
+      }
+    ],
+    "description": "StakeGame.getClaimReward(uint256) (contracts/Staking/StakeGame.sol#66-82) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- lastTime == 0 (contracts/Staking/StakeGame.sol#70)\n\t- claimTimes == 0 (contracts/Staking/StakeGame.sol#77)\n",
+    "markdown": "[StakeGame.getClaimReward(uint256)](contracts/Staking/StakeGame.sol#L66-L82) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- [lastTime == 0](contracts/Staking/StakeGame.sol#L70)\n\t- [claimTimes == 0](contracts/Staking/StakeGame.sol#L77)\n",
+    "first_markdown_element": "contracts/Staking/StakeGame.sol#L66-L82",
+    "id": "2df6eb2d4026dee2b6bce530412ffb26fec5c517666c035663b749afe9a53f79",
+    "check": "timestamp",
+    "impact": "Low",
+    "confidence": "Medium"
+  },
+  {
+    "elements": [
+      {
+        "type": "function",
+        "name": "claim",
+        "source_mapping": {
+          "start": 3417,
+          "length": 415,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
+          "starting_column": 5,
+          "ending_column": 6
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "contract",
+            "name": "StakeGame",
+            "source_mapping": {
+              "start": 250,
+              "length": 4285,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+                26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+                74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+                90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+                105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116
+              ],
+              "starting_column": 1,
+              "ending_column": 2
+            }
+          },
+          "signature": "claim(uint256)"
+        }
+      },
+      {
+        "type": "node",
+        "name": "claimReward == 0",
+        "source_mapping": {
+          "start": 3576,
+          "length": 16,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [92],
+          "starting_column": 13,
+          "ending_column": 29
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "claim",
+            "source_mapping": {
+              "start": 3417,
+              "length": 415,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "StakeGame",
+                "source_mapping": {
+                  "start": 250,
+                  "length": 4285,
+                  "filename_relative": "contracts/Staking/StakeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+                  "filename_short": "contracts/Staking/StakeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                    55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                    70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+                    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                    112, 113, 114, 115, 116
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "claim(uint256)"
+            }
+          }
+        }
+      }
+    ],
+    "description": "StakeGame.claim(uint256) (contracts/Staking/StakeGame.sol#89-99) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- claimReward == 0 (contracts/Staking/StakeGame.sol#92)\n",
+    "markdown": "[StakeGame.claim(uint256)](contracts/Staking/StakeGame.sol#L89-L99) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- [claimReward == 0](contracts/Staking/StakeGame.sol#L92)\n",
+    "first_markdown_element": "contracts/Staking/StakeGame.sol#L89-L99",
+    "id": "34961775beb2392919a726bad38490b0199c4ad6602828a708b25014e2737547",
+    "check": "timestamp",
+    "impact": "Low",
+    "confidence": "Medium"
+  },
+  {
+    "elements": [
+      {
+        "type": "function",
+        "name": "withdraw",
+        "source_mapping": {
+          "start": 4044,
+          "length": 488,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115],
+          "starting_column": 5,
+          "ending_column": 6
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "contract",
+            "name": "StakeGame",
+            "source_mapping": {
+              "start": 250,
+              "length": 4285,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+                26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
+                42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57,
+                58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73,
+                74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89,
+                90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104,
+                105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116
+              ],
+              "starting_column": 1,
+              "ending_column": 2
+            }
+          },
+          "signature": "withdraw(uint256)"
+        }
+      },
+      {
+        "type": "node",
+        "name": "claimReward != 0",
+        "source_mapping": {
+          "start": 4232,
+          "length": 16,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [107],
+          "starting_column": 13,
+          "ending_column": 29
+        },
+        "type_specific_fields": {
+          "parent": {
+            "type": "function",
+            "name": "withdraw",
+            "source_mapping": {
+              "start": 4044,
+              "length": 488,
+              "filename_relative": "contracts/Staking/StakeGame.sol",
+              "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+              "filename_short": "contracts/Staking/StakeGame.sol",
+              "is_dependency": false,
+              "lines": [
+                104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115
+              ],
+              "starting_column": 5,
+              "ending_column": 6
+            },
+            "type_specific_fields": {
+              "parent": {
+                "type": "contract",
+                "name": "StakeGame",
+                "source_mapping": {
+                  "start": 250,
+                  "length": 4285,
+                  "filename_relative": "contracts/Staking/StakeGame.sol",
+                  "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+                  "filename_short": "contracts/Staking/StakeGame.sol",
+                  "is_dependency": false,
+                  "lines": [
+                    10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39,
+                    40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54,
+                    55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69,
+                    70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84,
+                    85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+                    100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111,
+                    112, 113, 114, 115, 116
+                  ],
+                  "starting_column": 1,
+                  "ending_column": 2
+                }
+              },
+              "signature": "withdraw(uint256)"
+            }
+          }
+        }
+      }
+    ],
+    "description": "StakeGame.withdraw(uint256) (contracts/Staking/StakeGame.sol#104-115) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- claimReward != 0 (contracts/Staking/StakeGame.sol#107)\n",
+    "markdown": "[StakeGame.withdraw(uint256)](contracts/Staking/StakeGame.sol#L104-L115) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- [claimReward != 0](contracts/Staking/StakeGame.sol#L107)\n",
+    "first_markdown_element": "contracts/Staking/StakeGame.sol#L104-L115",
+    "id": "c3c19abb75d11729b13f5558ae3a6edbdcb2deff3890703369bf131399f80577",
+    "check": "timestamp",
+    "impact": "Low",
+    "confidence": "Medium"
+  },
+  {
+    "elements": [
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/BondToken.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\BondToken.sol",
+          "filename_short": "contracts/BondToken.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      },
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+          "filename_short": "contracts/Enumerable/PrimeGame.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      },
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Enumerable/PrimeNFT.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeNFT.sol",
+          "filename_short": "contracts/Enumerable/PrimeNFT.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      },
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Staking/StakeCoin.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeCoin.sol",
+          "filename_short": "contracts/Staking/StakeCoin.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      },
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      },
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Staking/StakeItem.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeItem.sol",
+          "filename_short": "contracts/Staking/StakeItem.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      },
+      {
+        "type": "pragma",
+        "name": ">=0.4.22<0.9.0",
+        "source_mapping": {
+          "start": 32,
+          "length": 33,
+          "filename_relative": "node_modules/hardhat/console.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\hardhat\\console.sol",
+          "filename_short": "node_modules/hardhat/console.sol",
+          "is_dependency": true,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 34
+        },
+        "type_specific_fields": {
+          "directive": ["solidity", ">=", "0.4", ".22", "<", "0.9", ".0"]
+        }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 102,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/access/Ownable.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 105,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\ERC20.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 106,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\IERC20.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 110,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\token\\ERC20\\extensions\\IERC20Metadata.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 107,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 108,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 116,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721Receiver.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 128,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\ERC721Enumerable.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 129,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\IERC721Enumerable.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 112,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\IERC721Metadata.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 86,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/utils/Context.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/utils/Context.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 87,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/utils/Counters.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\utils\\Counters.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/utils/Counters.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 101,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\utils\\Strings.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/utils/Strings.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 99,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\ERC165.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 100,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\IERC165.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 103,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\utils\\math\\Math.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/utils/math/Math.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "node_modules/erc-payable-token/contracts/token/ERC1363/ERC1363.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\erc-payable-token\\contracts\\token\\ERC1363\\ERC1363.sol",
+          "filename_short": "node_modules/erc-payable-token/contracts/token/ERC1363/ERC1363.sol",
+          "is_dependency": true,
+          "lines": [3],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\erc-payable-token\\contracts\\token\\ERC1363\\IERC1363.sol",
+          "filename_short": "node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363.sol",
+          "is_dependency": true,
+          "lines": [3],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\erc-payable-token\\contracts\\token\\ERC1363\\IERC1363Receiver.sol",
+          "filename_short": "node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol",
+          "is_dependency": true,
+          "lines": [3],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.0",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363Spender.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\erc-payable-token\\contracts\\token\\ERC1363\\IERC1363Spender.sol",
+          "filename_short": "node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363Spender.sol",
+          "is_dependency": true,
+          "lines": [3],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".0"] }
+      },
+      {
+        "type": "pragma",
+        "name": "^0.8.1",
+        "source_mapping": {
+          "start": 101,
+          "length": 23,
+          "filename_relative": "node_modules/@openzeppelin/contracts/utils/Address.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\node_modules\\@openzeppelin\\contracts\\utils\\Address.sol",
+          "filename_short": "node_modules/@openzeppelin/contracts/utils/Address.sol",
+          "is_dependency": true,
+          "lines": [4],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "^", "0.8", ".1"] }
+      }
+    ],
+    "description": "Different versions of Solidity are used:\n\t- Version used: ['0.8.17', '>=0.4.22<0.9.0', '^0.8.0', '^0.8.1']\n\t- 0.8.17 (contracts/BondToken.sol#2)\n\t- 0.8.17 (contracts/Enumerable/PrimeGame.sol#2)\n\t- 0.8.17 (contracts/Enumerable/PrimeNFT.sol#2)\n\t- 0.8.17 (contracts/Staking/StakeCoin.sol#2)\n\t- 0.8.17 (contracts/Staking/StakeGame.sol#2)\n\t- 0.8.17 (contracts/Staking/StakeItem.sol#2)\n\t- >=0.4.22<0.9.0 (node_modules/hardhat/console.sol#2)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/access/Ownable.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/utils/Context.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/utils/Counters.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/utils/Strings.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol#4)\n\t- ^0.8.0 (node_modules/@openzeppelin/contracts/utils/math/Math.sol#4)\n\t- ^0.8.0 (node_modules/erc-payable-token/contracts/token/ERC1363/ERC1363.sol#3)\n\t- ^0.8.0 (node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363.sol#3)\n\t- ^0.8.0 (node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol#3)\n\t- ^0.8.0 (node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363Spender.sol#3)\n\t- ^0.8.1 (node_modules/@openzeppelin/contracts/utils/Address.sol#4)\n",
+    "markdown": "Different versions of Solidity are used:\n\t- Version used: ['0.8.17', '>=0.4.22<0.9.0', '^0.8.0', '^0.8.1']\n\t- [0.8.17](contracts/BondToken.sol#L2)\n\t- [0.8.17](contracts/Enumerable/PrimeGame.sol#L2)\n\t- [0.8.17](contracts/Enumerable/PrimeNFT.sol#L2)\n\t- [0.8.17](contracts/Staking/StakeCoin.sol#L2)\n\t- [0.8.17](contracts/Staking/StakeGame.sol#L2)\n\t- [0.8.17](contracts/Staking/StakeItem.sol#L2)\n\t- [>=0.4.22<0.9.0](node_modules/hardhat/console.sol#L2)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/access/Ownable.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/token/ERC721/ERC721.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/token/ERC721/IERC721.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/utils/Context.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/utils/Counters.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/utils/Strings.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/utils/introspection/ERC165.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/utils/introspection/IERC165.sol#L4)\n\t- [^0.8.0](node_modules/@openzeppelin/contracts/utils/math/Math.sol#L4)\n\t- [^0.8.0](node_modules/erc-payable-token/contracts/token/ERC1363/ERC1363.sol#L3)\n\t- [^0.8.0](node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363.sol#L3)\n\t- [^0.8.0](node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363Receiver.sol#L3)\n\t- [^0.8.0](node_modules/erc-payable-token/contracts/token/ERC1363/IERC1363Spender.sol#L3)\n\t- [^0.8.1](node_modules/@openzeppelin/contracts/utils/Address.sol#L4)\n",
+    "first_markdown_element": "contracts/BondToken.sol#L2",
+    "id": "de2113b0a61050b2c4c8cb2d68b8506019e771dc664a7e2d78fbe710aad283dd",
+    "check": "pragma",
+    "impact": "Informational",
+    "confidence": "High"
+  },
+  {
+    "elements": [
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/BondToken.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\BondToken.sol",
+          "filename_short": "contracts/BondToken.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      }
+    ],
+    "description": "Pragma version0.8.17 (contracts/BondToken.sol#2) allows old versions\n",
+    "markdown": "Pragma version[0.8.17](contracts/BondToken.sol#L2) allows old versions\n",
+    "first_markdown_element": "contracts/BondToken.sol#L2",
+    "id": "c602cc13f381313ddcfc80fdfd38c8d1bf6ce664113ea1b2cf092d1d6fb749d7",
+    "check": "solc-version",
+    "impact": "Informational",
+    "confidence": "High"
+  },
+  {
+    "elements": [
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Enumerable/PrimeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeGame.sol",
+          "filename_short": "contracts/Enumerable/PrimeGame.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      }
+    ],
+    "description": "Pragma version0.8.17 (contracts/Enumerable/PrimeGame.sol#2) allows old versions\n",
+    "markdown": "Pragma version[0.8.17](contracts/Enumerable/PrimeGame.sol#L2) allows old versions\n",
+    "first_markdown_element": "contracts/Enumerable/PrimeGame.sol#L2",
+    "id": "02cf772e0983db875ba9524a8bc30925cdf9b026f178b76421e95110ae6aeb1a",
+    "check": "solc-version",
+    "impact": "Informational",
+    "confidence": "High"
+  },
+  {
+    "elements": [
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Enumerable/PrimeNFT.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Enumerable\\PrimeNFT.sol",
+          "filename_short": "contracts/Enumerable/PrimeNFT.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      }
+    ],
+    "description": "Pragma version0.8.17 (contracts/Enumerable/PrimeNFT.sol#2) allows old versions\n",
+    "markdown": "Pragma version[0.8.17](contracts/Enumerable/PrimeNFT.sol#L2) allows old versions\n",
+    "first_markdown_element": "contracts/Enumerable/PrimeNFT.sol#L2",
+    "id": "8af60888ec50e3f049bead65c97e9445ea914f9c8717943a684f5ce802be0433",
+    "check": "solc-version",
+    "impact": "Informational",
+    "confidence": "High"
+  },
+  {
+    "elements": [
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Staking/StakeCoin.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeCoin.sol",
+          "filename_short": "contracts/Staking/StakeCoin.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      }
+    ],
+    "description": "Pragma version0.8.17 (contracts/Staking/StakeCoin.sol#2) allows old versions\n",
+    "markdown": "Pragma version[0.8.17](contracts/Staking/StakeCoin.sol#L2) allows old versions\n",
+    "first_markdown_element": "contracts/Staking/StakeCoin.sol#L2",
+    "id": "e406100c2e42f6094acdb17abdfc948c66ccb041d9e98ea9116cf0e3dae31a49",
+    "check": "solc-version",
+    "impact": "Informational",
+    "confidence": "High"
+  },
+  {
+    "elements": [
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Staking/StakeGame.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeGame.sol",
+          "filename_short": "contracts/Staking/StakeGame.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      }
+    ],
+    "description": "Pragma version0.8.17 (contracts/Staking/StakeGame.sol#2) allows old versions\n",
+    "markdown": "Pragma version[0.8.17](contracts/Staking/StakeGame.sol#L2) allows old versions\n",
+    "first_markdown_element": "contracts/Staking/StakeGame.sol#L2",
+    "id": "77845f47e0f904f100920add60cea560cb33d418cefe5fa8c9f4dce5ce8e0d79",
+    "check": "solc-version",
+    "impact": "Informational",
+    "confidence": "High"
+  },
+  {
+    "elements": [
+      {
+        "type": "pragma",
+        "name": "0.8.17",
+        "source_mapping": {
+          "start": 33,
+          "length": 23,
+          "filename_relative": "contracts/Staking/StakeItem.sol",
+          "filename_absolute": "D:\\Source Code\\rare-skills-assignments\\week3\\contracts\\Staking\\StakeItem.sol",
+          "filename_short": "contracts/Staking/StakeItem.sol",
+          "is_dependency": false,
+          "lines": [2],
+          "starting_column": 1,
+          "ending_column": 24
+        },
+        "type_specific_fields": { "directive": ["solidity", "0.8", ".17"] }
+      }
+    ],
+    "description": "Pragma version0.8.17 (contracts/Staking/StakeItem.sol#2) allows old versions\n",
+    "markdown": "Pragma version[0.8.17](contracts/Staking/StakeItem.sol#L2) allows old versions\n",
+    "first_markdown_element": "contracts/Staking/StakeItem.sol#L2",
+    "id": "61c50cf961d3ebf786099297f257427bf187a507553c135c9a2af049ac6bc95a",
+    "check": "solc-version",
+    "impact": "Informational",
+    "confidence": "High"
+  },
+  {
+    "elements": [],
+    "description": "solc-0.8.17 is not recommended for deployment\n",
+    "markdown": "solc-0.8.17 is not recommended for deployment\n",
+    "first_markdown_element": "",
+    "id": "6f3445418a2dcf8fee15470dfb411e2de60b44e21924217d707228c314780c99",
+    "check": "solc-version",
+    "impact": "Informational",
+    "confidence": "High"
+  }
+]
