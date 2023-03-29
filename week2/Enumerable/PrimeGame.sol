@@ -10,15 +10,18 @@ contract PrimeGame {
         nft = _nft;
     }
 
-    uint[] private ids;
     /// @notice Gets all the tokenIds owned by an address
     /// @param user The address whose token ids must be fetched
     /// @return An array containing all the token ids owned by `user`
-    function getTokenIds(address user) external returns(uint[] memory) {
-        delete ids;
+    function getTokenIds(address user) external view returns(uint[] memory) {
         uint tokenCount = nft.balanceOf(user);
-        for (uint i = 0; i < tokenCount; i++) {
-            ids.push(nft.tokenOfOwnerByIndex(user, i));
+        uint[] memory ids = new uint[](tokenCount);
+        for (uint i = 0; i < tokenCount;) {
+            ids[i] = nft.tokenOfOwnerByIndex(user, i);
+
+            unchecked {
+                ++i;
+            }
         }
         return ids;
     }
