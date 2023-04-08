@@ -1,0 +1,1075 @@
+/mnt/d/Source Code/rare-skills-assignments/week4/echidna-exercise/part2/abdk/ABDKMath64x64.sol
+   1 |     | // SPDX-License-Identifier: BSD-4-Clause
+   2 |     | /*
+   3 |     |  * ABDK Math 64.64 Smart Contract Library.  Copyright © 2019 by ABDK Consulting.
+   4 |     |  * Author: Mikhail Vladimirov <mikhail.vladimirov@gmail.com>
+   5 |     |  */
+   6 |     | pragma solidity ^0.8.0;
+   7 |     | 
+   8 |     | /**
+   9 |     |  * Smart contract library of mathematical functions operating with signed
+  10 |     |  * 64.64-bit fixed point numbers.  Signed 64.64-bit fixed point number is
+  11 |     |  * basically a simple fraction whose numerator is signed 128-bit integer and
+  12 |     |  * denominator is 2^64.  As long as denominator is always the same, there is no
+  13 |     |  * need to store it, thus in Solidity signed 64.64-bit fixed point numbers are
+  14 |     |  * represented by int128 type holding only the numerator.
+  15 |     |  */
+  16 |     | library ABDKMath64x64 {
+  17 |     |   /*
+  18 |     |    * Minimum value signed 64.64-bit fixed point number may have. 
+  19 |     |    */
+  20 | *r  |   int128 private constant MIN_64x64 = -0x80000000000000000000000000000000;
+  21 |     | 
+  22 |     |   /*
+  23 |     |    * Maximum value signed 64.64-bit fixed point number may have. 
+  24 |     |    */
+  25 | *r  |   int128 private constant MAX_64x64 = 0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
+  26 |     | 
+  27 |     |   /**
+  28 |     |    * Convert signed 256-bit integer number into signed 64.64-bit fixed point
+  29 |     |    * number.  Revert on overflow.
+  30 |     |    *
+  31 |     |    * @param x signed 256-bit integer number
+  32 |     |    * @return signed 64.64-bit fixed point number
+  33 |     |    */
+  34 |     |   function fromInt (int256 x) internal pure returns (int128) {
+  35 |     |     unchecked {
+  36 |     |       require (x >= -0x8000000000000000 && x <= 0x7FFFFFFFFFFFFFFF);
+  37 |     |       return int128 (x << 64);
+  38 |     |     }
+  39 |     |   }
+  40 |     | 
+  41 |     |   /**
+  42 |     |    * Convert signed 64.64 fixed point number into signed 64-bit integer number
+  43 |     |    * rounding down.
+  44 |     |    *
+  45 |     |    * @param x signed 64.64-bit fixed point number
+  46 |     |    * @return signed 64-bit integer number
+  47 |     |    */
+  48 |     |   function toInt (int128 x) internal pure returns (int64) {
+  49 |     |     unchecked {
+  50 |     |       return int64 (x >> 64);
+  51 |     |     }
+  52 |     |   }
+  53 |     | 
+  54 |     |   /**
+  55 |     |    * Convert unsigned 256-bit integer number into signed 64.64-bit fixed point
+  56 |     |    * number.  Revert on overflow.
+  57 |     |    *
+  58 |     |    * @param x unsigned 256-bit integer number
+  59 |     |    * @return signed 64.64-bit fixed point number
+  60 |     |    */
+  61 |     |   function fromUInt (uint256 x) internal pure returns (int128) {
+  62 |     |     unchecked {
+  63 |     |       require (x <= 0x7FFFFFFFFFFFFFFF);
+  64 |     |       return int128 (int256 (x << 64));
+  65 |     |     }
+  66 |     |   }
+  67 |     | 
+  68 |     |   /**
+  69 |     |    * Convert signed 64.64 fixed point number into unsigned 64-bit integer
+  70 |     |    * number rounding down.  Revert on underflow.
+  71 |     |    *
+  72 |     |    * @param x signed 64.64-bit fixed point number
+  73 |     |    * @return unsigned 64-bit integer number
+  74 |     |    */
+  75 |     |   function toUInt (int128 x) internal pure returns (uint64) {
+  76 |     |     unchecked {
+  77 |     |       require (x >= 0);
+  78 |     |       return uint64 (uint128 (x >> 64));
+  79 |     |     }
+  80 |     |   }
+  81 |     | 
+  82 |     |   /**
+  83 |     |    * Convert signed 128.128 fixed point number into signed 64.64-bit fixed point
+  84 |     |    * number rounding down.  Revert on overflow.
+  85 |     |    *
+  86 |     |    * @param x signed 128.128-bin fixed point number
+  87 |     |    * @return signed 64.64-bit fixed point number
+  88 |     |    */
+  89 |     |   function from128x128 (int256 x) internal pure returns (int128) {
+  90 |     |     unchecked {
+  91 |     |       int256 result = x >> 64;
+  92 |     |       require (result >= MIN_64x64 && result <= MAX_64x64);
+  93 |     |       return int128 (result);
+  94 |     |     }
+  95 |     |   }
+  96 |     | 
+  97 |     |   /**
+  98 |     |    * Convert signed 64.64 fixed point number into signed 128.128 fixed point
+  99 |     |    * number.
+ 100 |     |    *
+ 101 |     |    * @param x signed 64.64-bit fixed point number
+ 102 |     |    * @return signed 128.128 fixed point number
+ 103 |     |    */
+ 104 |     |   function to128x128 (int128 x) internal pure returns (int256) {
+ 105 |     |     unchecked {
+ 106 |     |       return int256 (x) << 64;
+ 107 |     |     }
+ 108 |     |   }
+ 109 |     | 
+ 110 |     |   /**
+ 111 |     |    * Calculate x + y.  Revert on overflow.
+ 112 |     |    *
+ 113 |     |    * @param x signed 64.64-bit fixed point number
+ 114 |     |    * @param y signed 64.64-bit fixed point number
+ 115 |     |    * @return signed 64.64-bit fixed point number
+ 116 |     |    */
+ 117 | *r  |   function add (int128 x, int128 y) internal pure returns (int128) {
+ 118 |     |     unchecked {
+ 119 |     |       // bug: Introduced +1 here
+ 120 | *r  |       int256 result = int256(x) + y;
+ 121 | *r  |       require (result >= MIN_64x64 && result <= MAX_64x64);
+ 122 | *r  |       return int128 (result);
+ 123 |     |     }
+ 124 |     |   }
+ 125 |     | 
+ 126 |     |   /**
+ 127 |     |    * Calculate x - y.  Revert on overflow.
+ 128 |     |    *
+ 129 |     |    * @param x signed 64.64-bit fixed point number
+ 130 |     |    * @param y signed 64.64-bit fixed point number
+ 131 |     |    * @return signed 64.64-bit fixed point number
+ 132 |     |    */
+ 133 | *   |   function sub (int128 x, int128 y) internal pure returns (int128) {
+ 134 |     |     unchecked {
+ 135 | *   |       int256 result = int256(x) - y;
+ 136 | *   |       require (result >= MIN_64x64 && result <= MAX_64x64);
+ 137 | *   |       return int128 (result);
+ 138 |     |     }
+ 139 |     |   }
+ 140 |     | 
+ 141 |     |   /**
+ 142 |     |    * Calculate x * y rounding down.  Revert on overflow.
+ 143 |     |    *
+ 144 |     |    * @param x signed 64.64-bit fixed point number
+ 145 |     |    * @param y signed 64.64-bit fixed point number
+ 146 |     |    * @return signed 64.64-bit fixed point number
+ 147 |     |    */
+ 148 |     |   function mul (int128 x, int128 y) internal pure returns (int128) {
+ 149 |     |     unchecked {
+ 150 |     |       int256 result = int256(x) * y >> 64;
+ 151 |     |       require (result >= MIN_64x64 && result <= MAX_64x64);
+ 152 |     |       return int128 (result);
+ 153 |     |     }
+ 154 |     |   }
+ 155 |     | 
+ 156 |     |   /**
+ 157 |     |    * Calculate x * y rounding towards zero, where x is signed 64.64 fixed point
+ 158 |     |    * number and y is signed 256-bit integer number.  Revert on overflow.
+ 159 |     |    *
+ 160 |     |    * @param x signed 64.64 fixed point number
+ 161 |     |    * @param y signed 256-bit integer number
+ 162 |     |    * @return signed 256-bit integer number
+ 163 |     |    */
+ 164 |     |   function muli (int128 x, int256 y) internal pure returns (int256) {
+ 165 |     |     unchecked {
+ 166 |     |       if (x == MIN_64x64) {
+ 167 |     |         require (y >= -0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF &&
+ 168 |     |           y <= 0x1000000000000000000000000000000000000000000000000);
+ 169 |     |         return -y << 63;
+ 170 |     |       } else {
+ 171 |     |         bool negativeResult = false;
+ 172 |     |         if (x < 0) {
+ 173 |     |           x = -x;
+ 174 |     |           negativeResult = true;
+ 175 |     |         }
+ 176 |     |         if (y < 0) {
+ 177 |     |           y = -y; // We rely on overflow behavior here
+ 178 |     |           negativeResult = !negativeResult;
+ 179 |     |         }
+ 180 |     |         uint256 absoluteResult = mulu (x, uint256 (y));
+ 181 |     |         if (negativeResult) {
+ 182 |     |           require (absoluteResult <=
+ 183 |     |             0x8000000000000000000000000000000000000000000000000000000000000000);
+ 184 |     |           return -int256 (absoluteResult); // We rely on overflow behavior here
+ 185 |     |         } else {
+ 186 |     |           require (absoluteResult <=
+ 187 |     |             0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF);
+ 188 |     |           return int256 (absoluteResult);
+ 189 |     |         }
+ 190 |     |       }
+ 191 |     |     }
+ 192 |     |   }
+ 193 |     | 
+ 194 |     |   /**
+ 195 |     |    * Calculate x * y rounding down, where x is signed 64.64 fixed point number
+ 196 |     |    * and y is unsigned 256-bit integer number.  Revert on overflow.
+ 197 |     |    *
+ 198 |     |    * @param x signed 64.64 fixed point number
+ 199 |     |    * @param y unsigned 256-bit integer number
+ 200 |     |    * @return unsigned 256-bit integer number
+ 201 |     |    */
+ 202 |     |   function mulu (int128 x, uint256 y) internal pure returns (uint256) {
+ 203 |     |     unchecked {
+ 204 |     |       if (y == 0) return 0;
+ 205 |     | 
+ 206 |     |       require (x >= 0);
+ 207 |     | 
+ 208 |     |       uint256 lo = (uint256 (int256 (x)) * (y & 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF)) >> 64;
+ 209 |     |       uint256 hi = uint256 (int256 (x)) * (y >> 128);
+ 210 |     | 
+ 211 |     |       require (hi <= 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF);
+ 212 |     |       hi <<= 64;
+ 213 |     | 
+ 214 |     |       require (hi <=
+ 215 |     |         0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF - lo);
+ 216 |     |       return hi + lo;
+ 217 |     |     }
+ 218 |     |   }
+ 219 |     | 
+ 220 |     |   /**
+ 221 |     |    * Calculate x / y rounding towards zero.  Revert on overflow or when y is
+ 222 |     |    * zero.
+ 223 |     |    *
+ 224 |     |    * @param x signed 64.64-bit fixed point number
+ 225 |     |    * @param y signed 64.64-bit fixed point number
+ 226 |     |    * @return signed 64.64-bit fixed point number
+ 227 |     |    */
+ 228 | *r  |   function div (int128 x, int128 y) internal pure returns (int128) {
+ 229 |     |     unchecked {
+ 230 | *r  |       require (y != 0);
+ 231 | *r  |       int256 result = (int256 (x) << 64) / y;
+ 232 | *r  |       require (result >= MIN_64x64 && result <= MAX_64x64);
+ 233 | *r  |       return int128 (result);
+ 234 |     |     }
+ 235 |     |   }
+ 236 |     | 
+ 237 |     |   /**
+ 238 |     |    * Calculate x / y rounding towards zero, where x and y are signed 256-bit
+ 239 |     |    * integer numbers.  Revert on overflow or when y is zero.
+ 240 |     |    *
+ 241 |     |    * @param x signed 256-bit integer number
+ 242 |     |    * @param y signed 256-bit integer number
+ 243 |     |    * @return signed 64.64-bit fixed point number
+ 244 |     |    */
+ 245 |     |   function divi (int256 x, int256 y) internal pure returns (int128) {
+ 246 |     |     unchecked {
+ 247 |     |       require (y != 0);
+ 248 |     | 
+ 249 |     |       bool negativeResult = false;
+ 250 |     |       if (x < 0) {
+ 251 |     |         x = -x; // We rely on overflow behavior here
+ 252 |     |         negativeResult = true;
+ 253 |     |       }
+ 254 |     |       if (y < 0) {
+ 255 |     |         y = -y; // We rely on overflow behavior here
+ 256 |     |         negativeResult = !negativeResult;
+ 257 |     |       }
+ 258 |     |       uint128 absoluteResult = divuu (uint256 (x), uint256 (y));
+ 259 |     |       if (negativeResult) {
+ 260 |     |         require (absoluteResult <= 0x80000000000000000000000000000000);
+ 261 |     |         return -int128 (absoluteResult); // We rely on overflow behavior here
+ 262 |     |       } else {
+ 263 |     |         require (absoluteResult <= 0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF);
+ 264 |     |         return int128 (absoluteResult); // We rely on overflow behavior here
+ 265 |     |       }
+ 266 |     |     }
+ 267 |     |   }
+ 268 |     | 
+ 269 |     |   /**
+ 270 |     |    * Calculate x / y rounding towards zero, where x and y are unsigned 256-bit
+ 271 |     |    * integer numbers.  Revert on overflow or when y is zero.
+ 272 |     |    *
+ 273 |     |    * @param x unsigned 256-bit integer number
+ 274 |     |    * @param y unsigned 256-bit integer number
+ 275 |     |    * @return signed 64.64-bit fixed point number
+ 276 |     |    */
+ 277 |     |   function divu (uint256 x, uint256 y) internal pure returns (int128) {
+ 278 |     |     unchecked {
+ 279 |     |       require (y != 0);
+ 280 |     |       uint128 result = divuu (x, y);
+ 281 |     |       require (result <= uint128 (MAX_64x64));
+ 282 |     |       return int128 (result);
+ 283 |     |     }
+ 284 |     |   }
+ 285 |     | 
+ 286 |     |   /**
+ 287 |     |    * Calculate -x.  Revert on overflow.
+ 288 |     |    *
+ 289 |     |    * @param x signed 64.64-bit fixed point number
+ 290 |     |    * @return signed 64.64-bit fixed point number
+ 291 |     |    */
+ 292 |     |   function neg (int128 x) internal pure returns (int128) {
+ 293 |     |     unchecked {
+ 294 |     |       require (x != MIN_64x64);
+ 295 |     |       return -x;
+ 296 |     |     }
+ 297 |     |   }
+ 298 |     | 
+ 299 |     |   /**
+ 300 |     |    * Calculate |x|.  Revert on overflow.
+ 301 |     |    *
+ 302 |     |    * @param x signed 64.64-bit fixed point number
+ 303 |     |    * @return signed 64.64-bit fixed point number
+ 304 |     |    */
+ 305 | *r  |   function abs (int128 x) internal pure returns (int128) {
+ 306 |     |     unchecked {
+ 307 | *r  |       require (x != MIN_64x64);
+ 308 | *r  |       return x < 0 ? -x : x;
+ 309 |     |     }
+ 310 |     |   }
+ 311 |     | 
+ 312 |     |   /**
+ 313 |     |    * Calculate 1 / x rounding towards zero.  Revert on overflow or when x is
+ 314 |     |    * zero.
+ 315 |     |    *
+ 316 |     |    * @param x signed 64.64-bit fixed point number
+ 317 |     |    * @return signed 64.64-bit fixed point number
+ 318 |     |    */
+ 319 |     |   function inv (int128 x) internal pure returns (int128) {
+ 320 |     |     unchecked {
+ 321 |     |       require (x != 0);
+ 322 |     |       int256 result = int256 (0x100000000000000000000000000000000) / x;
+ 323 |     |       require (result >= MIN_64x64 && result <= MAX_64x64);
+ 324 |     |       return int128 (result);
+ 325 |     |     }
+ 326 |     |   }
+ 327 |     | 
+ 328 |     |   /**
+ 329 |     |    * Calculate arithmetics average of x and y, i.e. (x + y) / 2 rounding down.
+ 330 |     |    *
+ 331 |     |    * @param x signed 64.64-bit fixed point number
+ 332 |     |    * @param y signed 64.64-bit fixed point number
+ 333 |     |    * @return signed 64.64-bit fixed point number
+ 334 |     |    */
+ 335 |     |   function avg (int128 x, int128 y) internal pure returns (int128) {
+ 336 |     |     unchecked {
+ 337 |     |       return int128 ((int256 (x) + int256 (y)) >> 1);
+ 338 |     |     }
+ 339 |     |   }
+ 340 |     | 
+ 341 |     |   /**
+ 342 |     |    * Calculate geometric average of x and y, i.e. sqrt (x * y) rounding down.
+ 343 |     |    * Revert on overflow or in case x * y is negative.
+ 344 |     |    *
+ 345 |     |    * @param x signed 64.64-bit fixed point number
+ 346 |     |    * @param y signed 64.64-bit fixed point number
+ 347 |     |    * @return signed 64.64-bit fixed point number
+ 348 |     |    */
+ 349 |     |   function gavg (int128 x, int128 y) internal pure returns (int128) {
+ 350 |     |     unchecked {
+ 351 |     |       int256 m = int256 (x) * int256 (y);
+ 352 |     |       require (m >= 0);
+ 353 |     |       require (m <
+ 354 |     |           0x4000000000000000000000000000000000000000000000000000000000000000);
+ 355 |     |       return int128 (sqrtu (uint256 (m)));
+ 356 |     |     }
+ 357 |     |   }
+ 358 |     | 
+ 359 |     |   /**
+ 360 |     |    * Calculate x^y assuming 0^0 is 1, where x is signed 64.64 fixed point number
+ 361 |     |    * and y is unsigned 256-bit integer number.  Revert on overflow.
+ 362 |     |    *
+ 363 |     |    * @param x signed 64.64-bit fixed point number
+ 364 |     |    * @param y uint256 value
+ 365 |     |    * @return signed 64.64-bit fixed point number
+ 366 |     |    */
+ 367 |     |   function pow (int128 x, uint256 y) internal pure returns (int128) {
+ 368 |     |     unchecked {
+ 369 |     |       bool negative = x < 0 && y & 1 == 1;
+ 370 |     | 
+ 371 |     |       uint256 absX = uint128 (x < 0 ? -x : x);
+ 372 |     |       uint256 absResult;
+ 373 |     |       absResult = 0x100000000000000000000000000000000;
+ 374 |     | 
+ 375 |     |       if (absX <= 0x10000000000000000) {
+ 376 |     |         absX <<= 63;
+ 377 |     |         while (y != 0) {
+ 378 |     |           if (y & 0x1 != 0) {
+ 379 |     |             absResult = absResult * absX >> 127;
+ 380 |     |           }
+ 381 |     |           absX = absX * absX >> 127;
+ 382 |     | 
+ 383 |     |           if (y & 0x2 != 0) {
+ 384 |     |             absResult = absResult * absX >> 127;
+ 385 |     |           }
+ 386 |     |           absX = absX * absX >> 127;
+ 387 |     | 
+ 388 |     |           if (y & 0x4 != 0) {
+ 389 |     |             absResult = absResult * absX >> 127;
+ 390 |     |           }
+ 391 |     |           absX = absX * absX >> 127;
+ 392 |     | 
+ 393 |     |           if (y & 0x8 != 0) {
+ 394 |     |             absResult = absResult * absX >> 127;
+ 395 |     |           }
+ 396 |     |           absX = absX * absX >> 127;
+ 397 |     | 
+ 398 |     |           y >>= 4;
+ 399 |     |         }
+ 400 |     | 
+ 401 |     |         absResult >>= 64;
+ 402 |     |       } else {
+ 403 |     |         uint256 absXShift = 63;
+ 404 |     |         if (absX < 0x1000000000000000000000000) { absX <<= 32; absXShift -= 32; }
+ 405 |     |         if (absX < 0x10000000000000000000000000000) { absX <<= 16; absXShift -= 16; }
+ 406 |     |         if (absX < 0x1000000000000000000000000000000) { absX <<= 8; absXShift -= 8; }
+ 407 |     |         if (absX < 0x10000000000000000000000000000000) { absX <<= 4; absXShift -= 4; }
+ 408 |     |         if (absX < 0x40000000000000000000000000000000) { absX <<= 2; absXShift -= 2; }
+ 409 |     |         if (absX < 0x80000000000000000000000000000000) { absX <<= 1; absXShift -= 1; }
+ 410 |     | 
+ 411 |     |         uint256 resultShift = 0;
+ 412 |     |         while (y != 0) {
+ 413 |     |           require (absXShift < 64);
+ 414 |     | 
+ 415 |     |           if (y & 0x1 != 0) {
+ 416 |     |             absResult = absResult * absX >> 127;
+ 417 |     |             resultShift += absXShift;
+ 418 |     |             if (absResult > 0x100000000000000000000000000000000) {
+ 419 |     |               absResult >>= 1;
+ 420 |     |               resultShift += 1;
+ 421 |     |             }
+ 422 |     |           }
+ 423 |     |           absX = absX * absX >> 127;
+ 424 |     |           absXShift <<= 1;
+ 425 |     |           if (absX >= 0x100000000000000000000000000000000) {
+ 426 |     |               absX >>= 1;
+ 427 |     |               absXShift += 1;
+ 428 |     |           }
+ 429 |     | 
+ 430 |     |           y >>= 1;
+ 431 |     |         }
+ 432 |     | 
+ 433 |     |         require (resultShift < 64);
+ 434 |     |         absResult >>= 64 - resultShift;
+ 435 |     |       }
+ 436 |     |       int256 result = negative ? -int256 (absResult) : int256 (absResult);
+ 437 |     |       require (result >= MIN_64x64 && result <= MAX_64x64);
+ 438 |     |       return int128 (result);
+ 439 |     |     }
+ 440 |     |   }
+ 441 |     | 
+ 442 |     |   /**
+ 443 |     |    * Calculate sqrt (x) rounding down.  Revert if x < 0.
+ 444 |     |    *
+ 445 |     |    * @param x signed 64.64-bit fixed point number
+ 446 |     |    * @return signed 64.64-bit fixed point number
+ 447 |     |    */
+ 448 |     |   function sqrt (int128 x) internal pure returns (int128) {
+ 449 |     |     unchecked {
+ 450 |     |       require (x >= 0);
+ 451 |     |       return int128 (sqrtu (uint256 (int256 (x)) << 64));
+ 452 |     |     }
+ 453 |     |   }
+ 454 |     | 
+ 455 |     |   /**
+ 456 |     |    * Calculate binary logarithm of x.  Revert if x <= 0.
+ 457 |     |    *
+ 458 |     |    * @param x signed 64.64-bit fixed point number
+ 459 |     |    * @return signed 64.64-bit fixed point number
+ 460 |     |    */
+ 461 |     |   function log_2 (int128 x) internal pure returns (int128) {
+ 462 |     |     unchecked {
+ 463 |     |       require (x > 0);
+ 464 |     | 
+ 465 |     |       int256 msb = 0;
+ 466 |     |       int256 xc = x;
+ 467 |     |       if (xc >= 0x10000000000000000) { xc >>= 64; msb += 64; }
+ 468 |     |       if (xc >= 0x100000000) { xc >>= 32; msb += 32; }
+ 469 |     |       if (xc >= 0x10000) { xc >>= 16; msb += 16; }
+ 470 |     |       if (xc >= 0x100) { xc >>= 8; msb += 8; }
+ 471 |     |       if (xc >= 0x10) { xc >>= 4; msb += 4; }
+ 472 |     |       if (xc >= 0x4) { xc >>= 2; msb += 2; }
+ 473 |     |       if (xc >= 0x2) msb += 1;  // No need to shift xc anymore
+ 474 |     | 
+ 475 |     |       int256 result = msb - 64 << 64;
+ 476 |     |       uint256 ux = uint256 (int256 (x)) << uint256 (127 - msb);
+ 477 |     |       for (int256 bit = 0x8000000000000000; bit > 0; bit >>= 1) {
+ 478 |     |         ux *= ux;
+ 479 |     |         uint256 b = ux >> 255;
+ 480 |     |         ux >>= 127 + b;
+ 481 |     |         result += bit * int256 (b);
+ 482 |     |       }
+ 483 |     | 
+ 484 |     |       return int128 (result);
+ 485 |     |     }
+ 486 |     |   }
+ 487 |     | 
+ 488 |     |   /**
+ 489 |     |    * Calculate natural logarithm of x.  Revert if x <= 0.
+ 490 |     |    *
+ 491 |     |    * @param x signed 64.64-bit fixed point number
+ 492 |     |    * @return signed 64.64-bit fixed point number
+ 493 |     |    */
+ 494 |     |   function ln (int128 x) internal pure returns (int128) {
+ 495 |     |     unchecked {
+ 496 |     |       require (x > 0);
+ 497 |     | 
+ 498 |     |       return int128 (int256 (
+ 499 |     |           uint256 (int256 (log_2 (x))) * 0xB17217F7D1CF79ABC9E3B39803F2F6AF >> 128));
+ 500 |     |     }
+ 501 |     |   }
+ 502 |     | 
+ 503 |     |   /**
+ 504 |     |    * Calculate binary exponent of x.  Revert on overflow.
+ 505 |     |    *
+ 506 |     |    * @param x signed 64.64-bit fixed point number
+ 507 |     |    * @return signed 64.64-bit fixed point number
+ 508 |     |    */
+ 509 |     |   function exp_2 (int128 x) internal pure returns (int128) {
+ 510 |     |     unchecked {
+ 511 |     |       require (x < 0x400000000000000000); // Overflow
+ 512 |     | 
+ 513 |     |       if (x < -0x400000000000000000) return 0; // Underflow
+ 514 |     | 
+ 515 |     |       uint256 result = 0x80000000000000000000000000000000;
+ 516 |     | 
+ 517 |     |       if (x & 0x8000000000000000 > 0)
+ 518 |     |         result = result * 0x16A09E667F3BCC908B2FB1366EA957D3E >> 128;
+ 519 |     |       if (x & 0x4000000000000000 > 0)
+ 520 |     |         result = result * 0x1306FE0A31B7152DE8D5A46305C85EDEC >> 128;
+ 521 |     |       if (x & 0x2000000000000000 > 0)
+ 522 |     |         result = result * 0x1172B83C7D517ADCDF7C8C50EB14A791F >> 128;
+ 523 |     |       if (x & 0x1000000000000000 > 0)
+ 524 |     |         result = result * 0x10B5586CF9890F6298B92B71842A98363 >> 128;
+ 525 |     |       if (x & 0x800000000000000 > 0)
+ 526 |     |         result = result * 0x1059B0D31585743AE7C548EB68CA417FD >> 128;
+ 527 |     |       if (x & 0x400000000000000 > 0)
+ 528 |     |         result = result * 0x102C9A3E778060EE6F7CACA4F7A29BDE8 >> 128;
+ 529 |     |       if (x & 0x200000000000000 > 0)
+ 530 |     |         result = result * 0x10163DA9FB33356D84A66AE336DCDFA3F >> 128;
+ 531 |     |       if (x & 0x100000000000000 > 0)
+ 532 |     |         result = result * 0x100B1AFA5ABCBED6129AB13EC11DC9543 >> 128;
+ 533 |     |       if (x & 0x80000000000000 > 0)
+ 534 |     |         result = result * 0x10058C86DA1C09EA1FF19D294CF2F679B >> 128;
+ 535 |     |       if (x & 0x40000000000000 > 0)
+ 536 |     |         result = result * 0x1002C605E2E8CEC506D21BFC89A23A00F >> 128;
+ 537 |     |       if (x & 0x20000000000000 > 0)
+ 538 |     |         result = result * 0x100162F3904051FA128BCA9C55C31E5DF >> 128;
+ 539 |     |       if (x & 0x10000000000000 > 0)
+ 540 |     |         result = result * 0x1000B175EFFDC76BA38E31671CA939725 >> 128;
+ 541 |     |       if (x & 0x8000000000000 > 0)
+ 542 |     |         result = result * 0x100058BA01FB9F96D6CACD4B180917C3D >> 128;
+ 543 |     |       if (x & 0x4000000000000 > 0)
+ 544 |     |         result = result * 0x10002C5CC37DA9491D0985C348C68E7B3 >> 128;
+ 545 |     |       if (x & 0x2000000000000 > 0)
+ 546 |     |         result = result * 0x1000162E525EE054754457D5995292026 >> 128;
+ 547 |     |       if (x & 0x1000000000000 > 0)
+ 548 |     |         result = result * 0x10000B17255775C040618BF4A4ADE83FC >> 128;
+ 549 |     |       if (x & 0x800000000000 > 0)
+ 550 |     |         result = result * 0x1000058B91B5BC9AE2EED81E9B7D4CFAB >> 128;
+ 551 |     |       if (x & 0x400000000000 > 0)
+ 552 |     |         result = result * 0x100002C5C89D5EC6CA4D7C8ACC017B7C9 >> 128;
+ 553 |     |       if (x & 0x200000000000 > 0)
+ 554 |     |         result = result * 0x10000162E43F4F831060E02D839A9D16D >> 128;
+ 555 |     |       if (x & 0x100000000000 > 0)
+ 556 |     |         result = result * 0x100000B1721BCFC99D9F890EA06911763 >> 128;
+ 557 |     |       if (x & 0x80000000000 > 0)
+ 558 |     |         result = result * 0x10000058B90CF1E6D97F9CA14DBCC1628 >> 128;
+ 559 |     |       if (x & 0x40000000000 > 0)
+ 560 |     |         result = result * 0x1000002C5C863B73F016468F6BAC5CA2B >> 128;
+ 561 |     |       if (x & 0x20000000000 > 0)
+ 562 |     |         result = result * 0x100000162E430E5A18F6119E3C02282A5 >> 128;
+ 563 |     |       if (x & 0x10000000000 > 0)
+ 564 |     |         result = result * 0x1000000B1721835514B86E6D96EFD1BFE >> 128;
+ 565 |     |       if (x & 0x8000000000 > 0)
+ 566 |     |         result = result * 0x100000058B90C0B48C6BE5DF846C5B2EF >> 128;
+ 567 |     |       if (x & 0x4000000000 > 0)
+ 568 |     |         result = result * 0x10000002C5C8601CC6B9E94213C72737A >> 128;
+ 569 |     |       if (x & 0x2000000000 > 0)
+ 570 |     |         result = result * 0x1000000162E42FFF037DF38AA2B219F06 >> 128;
+ 571 |     |       if (x & 0x1000000000 > 0)
+ 572 |     |         result = result * 0x10000000B17217FBA9C739AA5819F44F9 >> 128;
+ 573 |     |       if (x & 0x800000000 > 0)
+ 574 |     |         result = result * 0x1000000058B90BFCDEE5ACD3C1CEDC823 >> 128;
+ 575 |     |       if (x & 0x400000000 > 0)
+ 576 |     |         result = result * 0x100000002C5C85FE31F35A6A30DA1BE50 >> 128;
+ 577 |     |       if (x & 0x200000000 > 0)
+ 578 |     |         result = result * 0x10000000162E42FF0999CE3541B9FFFCF >> 128;
+ 579 |     |       if (x & 0x100000000 > 0)
+ 580 |     |         result = result * 0x100000000B17217F80F4EF5AADDA45554 >> 128;
+ 581 |     |       if (x & 0x80000000 > 0)
+ 582 |     |         result = result * 0x10000000058B90BFBF8479BD5A81B51AD >> 128;
+ 583 |     |       if (x & 0x40000000 > 0)
+ 584 |     |         result = result * 0x1000000002C5C85FDF84BD62AE30A74CC >> 128;
+ 585 |     |       if (x & 0x20000000 > 0)
+ 586 |     |         result = result * 0x100000000162E42FEFB2FED257559BDAA >> 128;
+ 587 |     |       if (x & 0x10000000 > 0)
+ 588 |     |         result = result * 0x1000000000B17217F7D5A7716BBA4A9AE >> 128;
+ 589 |     |       if (x & 0x8000000 > 0)
+ 590 |     |         result = result * 0x100000000058B90BFBE9DDBAC5E109CCE >> 128;
+ 591 |     |       if (x & 0x4000000 > 0)
+ 592 |     |         result = result * 0x10000000002C5C85FDF4B15DE6F17EB0D >> 128;
+ 593 |     |       if (x & 0x2000000 > 0)
+ 594 |     |         result = result * 0x1000000000162E42FEFA494F1478FDE05 >> 128;
+ 595 |     |       if (x & 0x1000000 > 0)
+ 596 |     |         result = result * 0x10000000000B17217F7D20CF927C8E94C >> 128;
+ 597 |     |       if (x & 0x800000 > 0)
+ 598 |     |         result = result * 0x1000000000058B90BFBE8F71CB4E4B33D >> 128;
+ 599 |     |       if (x & 0x400000 > 0)
+ 600 |     |         result = result * 0x100000000002C5C85FDF477B662B26945 >> 128;
+ 601 |     |       if (x & 0x200000 > 0)
+ 602 |     |         result = result * 0x10000000000162E42FEFA3AE53369388C >> 128;
+ 603 |     |       if (x & 0x100000 > 0)
+ 604 |     |         result = result * 0x100000000000B17217F7D1D351A389D40 >> 128;
+ 605 |     |       if (x & 0x80000 > 0)
+ 606 |     |         result = result * 0x10000000000058B90BFBE8E8B2D3D4EDE >> 128;
+ 607 |     |       if (x & 0x40000 > 0)
+ 608 |     |         result = result * 0x1000000000002C5C85FDF4741BEA6E77E >> 128;
+ 609 |     |       if (x & 0x20000 > 0)
+ 610 |     |         result = result * 0x100000000000162E42FEFA39FE95583C2 >> 128;
+ 611 |     |       if (x & 0x10000 > 0)
+ 612 |     |         result = result * 0x1000000000000B17217F7D1CFB72B45E1 >> 128;
+ 613 |     |       if (x & 0x8000 > 0)
+ 614 |     |         result = result * 0x100000000000058B90BFBE8E7CC35C3F0 >> 128;
+ 615 |     |       if (x & 0x4000 > 0)
+ 616 |     |         result = result * 0x10000000000002C5C85FDF473E242EA38 >> 128;
+ 617 |     |       if (x & 0x2000 > 0)
+ 618 |     |         result = result * 0x1000000000000162E42FEFA39F02B772C >> 128;
+ 619 |     |       if (x & 0x1000 > 0)
+ 620 |     |         result = result * 0x10000000000000B17217F7D1CF7D83C1A >> 128;
+ 621 |     |       if (x & 0x800 > 0)
+ 622 |     |         result = result * 0x1000000000000058B90BFBE8E7BDCBE2E >> 128;
+ 623 |     |       if (x & 0x400 > 0)
+ 624 |     |         result = result * 0x100000000000002C5C85FDF473DEA871F >> 128;
+ 625 |     |       if (x & 0x200 > 0)
+ 626 |     |         result = result * 0x10000000000000162E42FEFA39EF44D91 >> 128;
+ 627 |     |       if (x & 0x100 > 0)
+ 628 |     |         result = result * 0x100000000000000B17217F7D1CF79E949 >> 128;
+ 629 |     |       if (x & 0x80 > 0)
+ 630 |     |         result = result * 0x10000000000000058B90BFBE8E7BCE544 >> 128;
+ 631 |     |       if (x & 0x40 > 0)
+ 632 |     |         result = result * 0x1000000000000002C5C85FDF473DE6ECA >> 128;
+ 633 |     |       if (x & 0x20 > 0)
+ 634 |     |         result = result * 0x100000000000000162E42FEFA39EF366F >> 128;
+ 635 |     |       if (x & 0x10 > 0)
+ 636 |     |         result = result * 0x1000000000000000B17217F7D1CF79AFA >> 128;
+ 637 |     |       if (x & 0x8 > 0)
+ 638 |     |         result = result * 0x100000000000000058B90BFBE8E7BCD6D >> 128;
+ 639 |     |       if (x & 0x4 > 0)
+ 640 |     |         result = result * 0x10000000000000002C5C85FDF473DE6B2 >> 128;
+ 641 |     |       if (x & 0x2 > 0)
+ 642 |     |         result = result * 0x1000000000000000162E42FEFA39EF358 >> 128;
+ 643 |     |       if (x & 0x1 > 0)
+ 644 |     |         result = result * 0x10000000000000000B17217F7D1CF79AB >> 128;
+ 645 |     | 
+ 646 |     |       result >>= uint256 (int256 (63 - (x >> 64)));
+ 647 |     |       require (result <= uint256 (int256 (MAX_64x64)));
+ 648 |     | 
+ 649 |     |       return int128 (int256 (result));
+ 650 |     |     }
+ 651 |     |   }
+ 652 |     | 
+ 653 |     |   /**
+ 654 |     |    * Calculate natural exponent of x.  Revert on overflow.
+ 655 |     |    *
+ 656 |     |    * @param x signed 64.64-bit fixed point number
+ 657 |     |    * @return signed 64.64-bit fixed point number
+ 658 |     |    */
+ 659 |     |   function exp (int128 x) internal pure returns (int128) {
+ 660 |     |     unchecked {
+ 661 |     |       require (x < 0x400000000000000000); // Overflow
+ 662 |     | 
+ 663 |     |       if (x < -0x400000000000000000) return 0; // Underflow
+ 664 |     | 
+ 665 |     |       return exp_2 (
+ 666 |     |           int128 (int256 (x) * 0x171547652B82FE1777D0FFDA0D23A7D12 >> 128));
+ 667 |     |     }
+ 668 |     |   }
+ 669 |     | 
+ 670 |     |   /**
+ 671 |     |    * Calculate x / y rounding towards zero, where x and y are unsigned 256-bit
+ 672 |     |    * integer numbers.  Revert on overflow or when y is zero.
+ 673 |     |    *
+ 674 |     |    * @param x unsigned 256-bit integer number
+ 675 |     |    * @param y unsigned 256-bit integer number
+ 676 |     |    * @return unsigned 64.64-bit fixed point number
+ 677 |     |    */
+ 678 |     |   function divuu (uint256 x, uint256 y) private pure returns (uint128) {
+ 679 |     |     unchecked {
+ 680 |     |       require (y != 0);
+ 681 |     | 
+ 682 |     |       uint256 result;
+ 683 |     | 
+ 684 |     |       if (x <= 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF)
+ 685 |     |         result = (x << 64) / y;
+ 686 |     |       else {
+ 687 |     |         uint256 msb = 192;
+ 688 |     |         uint256 xc = x >> 192;
+ 689 |     |         if (xc >= 0x100000000) { xc >>= 32; msb += 32; }
+ 690 |     |         if (xc >= 0x10000) { xc >>= 16; msb += 16; }
+ 691 |     |         if (xc >= 0x100) { xc >>= 8; msb += 8; }
+ 692 |     |         if (xc >= 0x10) { xc >>= 4; msb += 4; }
+ 693 |     |         if (xc >= 0x4) { xc >>= 2; msb += 2; }
+ 694 |     |         if (xc >= 0x2) msb += 1;  // No need to shift xc anymore
+ 695 |     | 
+ 696 |     |         result = (x << 255 - msb) / ((y - 1 >> msb - 191) + 1);
+ 697 |     |         require (result <= 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF);
+ 698 |     | 
+ 699 |     |         uint256 hi = result * (y >> 128);
+ 700 |     |         uint256 lo = result * (y & 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF);
+ 701 |     | 
+ 702 |     |         uint256 xh = x >> 192;
+ 703 |     |         uint256 xl = x << 64;
+ 704 |     | 
+ 705 |     |         if (xl < lo) xh -= 1;
+ 706 |     |         xl -= lo; // We rely on overflow behavior here
+ 707 |     |         lo = hi << 128;
+ 708 |     |         if (xl < lo) xh -= 1;
+ 709 |     |         xl -= lo; // We rely on overflow behavior here
+ 710 |     | 
+ 711 |     |         require (xh == hi >> 128);
+ 712 |     | 
+ 713 |     |         result += xl / y;
+ 714 |     |       }
+ 715 |     | 
+ 716 |     |       require (result <= 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF);
+ 717 |     |       return uint128 (result);
+ 718 |     |     }
+ 719 |     |   }
+ 720 |     | 
+ 721 |     |   /**
+ 722 |     |    * Calculate sqrt (x) rounding down, where x is unsigned 256-bit integer
+ 723 |     |    * number.
+ 724 |     |    *
+ 725 |     |    * @param x unsigned 256-bit integer number
+ 726 |     |    * @return unsigned 128-bit integer number
+ 727 |     |    */
+ 728 |     |   function sqrtu (uint256 x) private pure returns (uint128) {
+ 729 |     |     unchecked {
+ 730 |     |       if (x == 0) return 0;
+ 731 |     |       else {
+ 732 |     |         uint256 xx = x;
+ 733 |     |         uint256 r = 1;
+ 734 |     |         if (xx >= 0x100000000000000000000000000000000) { xx >>= 128; r <<= 64; }
+ 735 |     |         if (xx >= 0x10000000000000000) { xx >>= 64; r <<= 32; }
+ 736 |     |         if (xx >= 0x100000000) { xx >>= 32; r <<= 16; }
+ 737 |     |         if (xx >= 0x10000) { xx >>= 16; r <<= 8; }
+ 738 |     |         if (xx >= 0x100) { xx >>= 8; r <<= 4; }
+ 739 |     |         if (xx >= 0x10) { xx >>= 4; r <<= 2; }
+ 740 |     |         if (xx >= 0x8) { r <<= 1; }
+ 741 |     |         r = (r + x / r) >> 1;
+ 742 |     |         r = (r + x / r) >> 1;
+ 743 |     |         r = (r + x / r) >> 1;
+ 744 |     |         r = (r + x / r) >> 1;
+ 745 |     |         r = (r + x / r) >> 1;
+ 746 |     |         r = (r + x / r) >> 1;
+ 747 |     |         r = (r + x / r) >> 1; // Seven iterations should be enough
+ 748 |     |         uint256 r1 = x / r;
+ 749 |     |         return uint128 (r < r1 ? r : r1);
+ 750 |     |       }
+ 751 |     |     }
+ 752 |     |   }
+ 753 |     | }
+ 754 |     | 
+
+/mnt/d/Source Code/rare-skills-assignments/week4/echidna-exercise/part2/abdk/TestABDK.sol
+   1 |     | // SPDX-License-Identifier: BSD-4-Clause
+   2 |     | pragma solidity ^0.8.0;
+   3 |     | 
+   4 |     | import "./ABDKMath64x64.sol";
+   5 | *r  | 
+   6 |     | contract TestABDK {
+   7 |     |     /* ================================================================
+   8 |     |        Library wrappers.
+   9 |     |        These functions allow calling the ABDKMath64x64 library.
+  10 |     |        ================================================================ */
+  11 |     |     function debug(string calldata x, int128 y) private {
+  12 |     |         emit Value(x, ABDKMath64x64.toInt(y));
+  13 |     |     }
+  14 |     | 
+  15 |     |     function fromInt(int256 x) private returns (int128) {
+  16 |     |         return ABDKMath64x64.fromInt(x);
+  17 |     |     }
+  18 |     | 
+  19 |     |     function toInt(int128 x) private returns (int64) {
+  20 |     |         return ABDKMath64x64.toInt(x);
+  21 |     |     }
+  22 |     | 
+  23 |     |     function fromUInt(uint256 x) private returns (int128) {
+  24 |     |         return ABDKMath64x64.fromUInt(x);
+  25 |     |     }
+  26 |     | 
+  27 |     |     function toUInt(int128 x) private returns (uint64) {
+  28 |     |         return ABDKMath64x64.toUInt(x);
+  29 |     |     }
+  30 |     | 
+  31 |     |     function from128x128(int256 x) private returns (int128) {
+  32 |     |         return ABDKMath64x64.from128x128(x);
+  33 |     |     }
+  34 |     | 
+  35 |     |     function to128x128(int128 x) private returns (int256) {
+  36 |     |         return ABDKMath64x64.to128x128(x);
+  37 |     |     }
+  38 |     | 
+  39 | *r  |     function add(int128 x, int128 y) private returns (int128) {
+  40 | *r  |         return ABDKMath64x64.add(x, y);
+  41 |     |     }
+  42 |     | 
+  43 | *   |     function sub(int128 x, int128 y) private returns (int128) {
+  44 | *   |         return ABDKMath64x64.sub(x, y);
+  45 |     |     }
+  46 |     | 
+  47 |     |     function mul(int128 x, int128 y) private returns (int128) {
+  48 |     |         return ABDKMath64x64.mul(x, y);
+  49 |     |     }
+  50 |     | 
+  51 |     |     function muli(int128 x, int256 y) private returns (int256) {
+  52 |     |         return ABDKMath64x64.muli(x, y);
+  53 |     |     }
+  54 |     | 
+  55 |     |     function mulu(int128 x, uint256 y) private returns (uint256) {
+  56 |     |         return ABDKMath64x64.mulu(x, y);
+  57 |     |     }
+  58 |     | 
+  59 | *r  |     function div(int128 x, int128 y) private returns (int128) {
+  60 | *r  |         return ABDKMath64x64.div(x, y);
+  61 |     |     }
+  62 |     | 
+  63 |     |     function divi(int256 x, int256 y) private returns (int128) {
+  64 |     |         return ABDKMath64x64.divi(x, y);
+  65 |     |     }
+  66 |     | 
+  67 |     |     function divu(uint256 x, uint256 y) private returns (int128) {
+  68 |     |         return ABDKMath64x64.divu(x, y);
+  69 |     |     }
+  70 |     | 
+  71 |     |     function neg(int128 x) private returns (int128) {
+  72 |     |         return ABDKMath64x64.neg(x);
+  73 |     |     }
+  74 |     | 
+  75 | *r  |     function abs(int128 x) private returns (int128) {
+  76 | *r  |         return ABDKMath64x64.abs(x);
+  77 |     |     }
+  78 |     | 
+  79 |     |     function inv(int128 x) private returns (int128) {
+  80 |     |         return ABDKMath64x64.inv(x);
+  81 |     |     }
+  82 |     | 
+  83 |     |     function avg(int128 x, int128 y) private returns (int128) {
+  84 |     |         return ABDKMath64x64.avg(x, y);
+  85 |     |     }
+  86 |     | 
+  87 |     |     function gavg(int128 x, int128 y) private returns (int128) {
+  88 |     |         return ABDKMath64x64.gavg(x, y);
+  89 |     |     }
+  90 |     | 
+  91 |     |     function pow(int128 x, uint256 y) private returns (int128) {
+  92 |     |         return ABDKMath64x64.pow(x, y);
+  93 |     |     }
+  94 |     | 
+  95 |     |     function sqrt(int128 x) private returns (int128) {
+  96 |     |         return ABDKMath64x64.sqrt(x);
+  97 |     |     }
+  98 |     | 
+  99 |     |     function log_2(int128 x) private returns (int128) {
+ 100 |     |         return ABDKMath64x64.log_2(x);
+ 101 |     |     }
+ 102 |     | 
+ 103 |     |     function ln(int128 x) private returns (int128) {
+ 104 |     |         return ABDKMath64x64.ln(x);
+ 105 |     |     }
+ 106 |     | 
+ 107 |     |     function exp_2(int128 x) private returns (int128) {
+ 108 |     |         return ABDKMath64x64.exp_2(x);
+ 109 |     |     }
+ 110 |     | 
+ 111 |     |     function exp(int128 x) private returns (int128) {
+ 112 |     |         return ABDKMath64x64.exp(x);
+ 113 |     |     }
+ 114 |     | 
+ 115 |     |     /* ================================================================
+ 116 |     |        64x64 fixed-point constants used for testing specific values.
+ 117 |     |        This assumes that ABDK library's fromInt(x) works as expected.
+ 118 |     |        ================================================================ */
+ 119 |     |     int128 internal ZERO_FP = ABDKMath64x64.fromInt(0);
+ 120 |     |     int128 internal ONE_FP = ABDKMath64x64.fromInt(1);
+ 121 |     |     int128 internal MINUS_ONE_FP = ABDKMath64x64.fromInt(-1);
+ 122 |     |     int128 internal TWO_FP = ABDKMath64x64.fromInt(2);
+ 123 |     |     int128 internal THREE_FP = ABDKMath64x64.fromInt(3);
+ 124 |     |     int128 internal EIGHT_FP = ABDKMath64x64.fromInt(8);
+ 125 |     |     int128 internal THOUSAND_FP = ABDKMath64x64.fromInt(1000);
+ 126 |     |     int128 internal MINUS_SIXTY_FOUR_FP = ABDKMath64x64.fromInt(-64);
+ 127 |     |     int128 internal EPSILON = 1;
+ 128 |     |     int128 internal ONE_TENTH_FP =
+ 129 |     |         ABDKMath64x64.div(ABDKMath64x64.fromInt(1), ABDKMath64x64.fromInt(10));
+ 130 |     | 
+ 131 |     |     /* ================================================================
+ 132 |     |        Constants used for precision loss calculations
+ 133 |     |        ================================================================ */
+ 134 |     |     uint256 internal REQUIRED_SIGNIFICANT_BITS = 10;
+ 135 |     | 
+ 136 |     |     /* ================================================================
+ 137 |     |        Integer representations maximum values.
+ 138 |     |        These constants are used for testing edge cases or limits for 
+ 139 |     |        possible values.
+ 140 |     |        ================================================================ */
+ 141 |     |     int128 private constant MIN_64x64 = -0x80000000000000000000000000000000;
+ 142 |     |     int128 private constant MAX_64x64 = 0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
+ 143 |     |     int256 private constant MAX_256 =
+ 144 |     |         0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
+ 145 |     |     int256 private constant MIN_256 =
+ 146 |     |         -0x8000000000000000000000000000000000000000000000000000000000000000;
+ 147 |     |     uint256 private constant MAX_U256 =
+ 148 |     |         0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF;
+ 149 |     | 
+ 150 |     |     /* ================================================================
+ 151 |     |        Helper functions.
+ 152 |     |        ================================================================ */
+ 153 |     | 
+ 154 |     |     // This function allows to compare a and b for equality, discarding
+ 155 |     |     // the last precision_bits bits.
+ 156 |     |     // This implements an absolute value function in order to not use
+ 157 |     |     // the implementation from the library under test.
+ 158 |     |     function equal_within_precision(
+ 159 |     |         int128 a,
+ 160 |     |         int128 b,
+ 161 |     |         uint256 precision_bits
+ 162 |     |     ) private returns (bool) {
+ 163 |     |         int128 max = (a > b) ? a : b;
+ 164 |     |         int128 min = (a > b) ? b : a;
+ 165 |     |         int128 r = (max - min) >> precision_bits;
+ 166 |     | 
+ 167 |     |         return (r == 0);
+ 168 |     |     }
+ 169 |     | 
+ 170 |     |     function equal_within_precision_u(
+ 171 |     |         uint256 a,
+ 172 |     |         uint256 b,
+ 173 |     |         uint256 precision_bits
+ 174 |     |     ) private returns (bool) {
+ 175 |     |         uint256 max = (a > b) ? a : b;
+ 176 |     |         uint256 min = (a > b) ? b : a;
+ 177 |     |         uint256 r = (max - min) >> precision_bits;
+ 178 |     | 
+ 179 |     |         return (r == 0);
+ 180 |     |     }
+ 181 |     | 
+ 182 |     |     // This function determines if the relative error between a and b is less
+ 183 |     |     // than error_percent % (expressed as a 64x64 value)
+ 184 |     |     // Uses functions from the library under test!
+ 185 |     |     function equal_within_tolerance(
+ 186 |     |         int128 a,
+ 187 |     |         int128 b,
+ 188 |     |         int128 error_percent
+ 189 |     |     ) private returns (bool) {
+ 190 |     |         int128 tol_value = abs(mul(a, div(error_percent, fromUInt(100))));
+ 191 |     | 
+ 192 |     |         return (abs(sub(b, a)) <= tol_value);
+ 193 |     |     }
+ 194 |     | 
+ 195 |     |     // Check that there are remaining significant digits after a multiplication
+ 196 |     |     // Uses functions from the library under test!
+ 197 |     |     function significant_digits_lost_in_mult(
+ 198 |     |         int128 a,
+ 199 |     |         int128 b
+ 200 |     |     ) private returns (bool) {
+ 201 |     |         int128 x = a >= 0 ? a : -a;
+ 202 |     |         int128 y = b >= 0 ? b : -b;
+ 203 |     | 
+ 204 |     |         int128 lx = toInt(log_2(x));
+ 205 |     |         int128 ly = toInt(log_2(y));
+ 206 |     | 
+ 207 |     |         return (lx + ly - 1 <= -64);
+ 208 |     |     }
+ 209 |     | 
+ 210 |     |     // Return how many significant bits will remain after multiplying a and b
+ 211 |     |     // Uses functions from the library under test!
+ 212 |     |     function significant_bits_after_mult(
+ 213 |     |         int128 a,
+ 214 |     |         int128 b
+ 215 |     |     ) private returns (uint256) {
+ 216 |     |         int128 x = a >= 0 ? a : -a;
+ 217 |     |         int128 y = b >= 0 ? b : -b;
+ 218 |     | 
+ 219 |     |         int128 lx = toInt(log_2(x));
+ 220 |     |         int128 ly = toInt(log_2(y));
+ 221 |     |         int256 prec = lx + ly - 1;
+ 222 |     | 
+ 223 |     |         if (prec < -64) return 0;
+ 224 |     |         else return (64 + uint256(prec));
+ 225 |     |     }
+ 226 |     | 
+ 227 |     |     // Return the i most significant bits from |n|. If n has less than i significant bits, return |n|
+ 228 |     |     // Uses functions from the library under test!
+ 229 |     |     function most_significant_bits(
+ 230 |     |         int128 n,
+ 231 |     |         uint256 i
+ 232 |     |     ) private returns (uint256) {
+ 233 |     |         // Create a mask consisting of i bits set to 1
+ 234 |     |         uint256 mask = (2 ** i) - 1;
+ 235 |     | 
+ 236 |     |         // Get the position of the MSB set to 1 of n
+ 237 |     |         uint256 pos = uint64(toInt(log_2(n)) + 64 + 1);
+ 238 |     | 
+ 239 |     |         // Get the positive value of n
+ 240 |     |         uint256 value = (n > 0) ? uint128(n) : uint128(-n);
+ 241 |     | 
+ 242 |     |         // Shift the mask to match the rightmost 1-set bit
+ 243 |     |         if (pos > i) {
+ 244 |     |             mask <<= (pos - i);
+ 245 |     |         }
+ 246 |     | 
+ 247 |     |         return (value & mask);
+ 248 |     |     }
+ 249 |     | 
+ 250 |     |     // Returns true if the n most significant bits of a and b are almost equal
+ 251 |     |     // Uses functions from the library under test!
+ 252 |     |     function equal_most_significant_bits_within_precision(
+ 253 |     |         int128 a,
+ 254 |     |         int128 b,
+ 255 |     |         uint256 bits
+ 256 |     |     ) private returns (bool) {
+ 257 |     |         uint256 a_bits = uint256(int256(toInt(log_2(a)) + 64));
+ 258 |     |         uint256 b_bits = uint256(int256(toInt(log_2(b)) + 64));
+ 259 |     | 
+ 260 |     |         uint256 shift_bits = (a_bits > b_bits)
+ 261 |     |             ? (a_bits - bits)
+ 262 |     |             : (b_bits - bits);
+ 263 |     | 
+ 264 |     |         uint256 a_msb = most_significant_bits(a, bits) >> shift_bits;
+ 265 |     |         uint256 b_msb = most_significant_bits(b, bits) >> shift_bits;
+ 266 |     | 
+ 267 |     |         return equal_within_precision_u(a_msb, b_msb, 1);
+ 268 |     |     }
+ 269 |     | 
+ 270 |     |     /* ================================================================
+ 271 |     |        Events used for debugging or showing information.
+ 272 |     |        ================================================================ */
+ 273 |     |     event Value(string reason, int128 val);
+ 274 |     |     event LogErr(bytes error);
+ 275 |     |     event Debug(int128, int128);
+ 276 |     | 
+ 277 |     |     /* ================================================================
+ 278 |     |     Start of tests
+ 279 |     |     ================================================================ */
+ 280 |     | 
+ 281 |     |     // Test for associative property
+ 282 |     |     // (x + y) + z == x + (y + z)
+ 283 | *r  |     function add_test_associative(int128 x, int128 y, int128 z) public {
+ 284 | *r  |         assert(add(add(x, y), z) == add(x, add(y, z)));
+ 285 |     |     }
+ 286 |     | 
+ 287 |     |     // Test (x + y) - y == x
+ 288 | *r  |     function add_sub_inverse_operations(int128 x, int128 y) public {
+ 289 | *r  |         emit Debug(x, y);
+ 290 |     | 
+ 291 | *r  |         int128 x_y = add(x, y);
+ 292 | *   |         int128 new_x = sub(x_y, y);
+ 293 |     | 
+ 294 | *   |         emit Debug(x_y, new_x);
+ 295 |     | 
+ 296 | *   |         assert(new_x == x);
+ 297 |     |     }
+ 298 |     | 
+ 299 |     |     // Test that division is not commutative
+ 300 |     |     // (x / y) != (y / x)
+ 301 | *r  |     function div_test_not_commutative(int128 x, int128 y) public {
+ 302 |     |         // pre-condition
+ 303 |     |         // require(abs(x) != abs(y));
+ 304 |     |         // optimization
+ 305 | *r  |         if(abs(x) == abs(y)) y += 1;
+ 306 |     | 
+ 307 |     |         // action
+ 308 | *r  |         int128 x_y = div(x, y);
+ 309 | *r  |         int128 y_x = div(y, x);
+ 310 |     | 
+ 311 |     |         // post-condition
+ 312 |     |         // if (abs(x) == abs(y)) assert(x_y == y_x);
+ 313 |     |         // else 
+ 314 | *   |         assert(x_y != y_x);
+ 315 |     |     }
+ 316 |     | }
+ 317 |     | 
+
