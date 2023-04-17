@@ -14,7 +14,7 @@ a has 1000 SET
 Attack sequence:
 a approves b for 1 SET
 b transfers 1 SET from a to c
-    this causes underflow on line 47
+    this causes underflow on line 27
     `balanceOf[msg.sender] -= value;`
     msg.sender is b and b has balance 0
     so, 0-1=MAX
