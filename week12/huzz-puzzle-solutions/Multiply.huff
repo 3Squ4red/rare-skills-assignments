@@ -1,0 +1,62 @@
+
+/** 
+ *  MULTIPLY HUFF EXERCISE
+ *
+ *  When writing solidity, we most times have to perform some mathematical operations like multiplication etc
+ *  
+ *  The task is to write within the `MAIN` macro below, a function named `multiply` that takes in 2 uint256s, and returns their product. Be sure to revert on overflow
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
+ */
+
+#define function multiply(uint256, uint256) payable returns(uint256)
+
+#define macro SAFE_MUL() = takes (2) returns (2) {
+    // Start stack: [b,a]
+
+    // revert if (b!=0 && a != (a*b)/b)
+    dup2       // [a, b, a]
+    dup2       // [b, a, b, a]
+    dup1       // [b, b, a, b, a]
+
+    // checking if (b != 0)
+    iszero     // [b == 0, b, a, b, a]
+    iszero     // [b != 0, b, a, b, a]
+
+    // checking if (a != (a*b)/b)
+    swap2      // [a, b, b != 0, b, a]
+    mul        // [a*b, b != 0, b, a]
+    dup1       // [a*b, a*b, b != 0, b, a]
+    swap3      // [b, a*b, b != 0, a*b, a]
+    swap1      // [a*b, b, b != 0, a*b, a]
+    div        // [(a*b)/b, b != 0, a*b, a]
+    dup4       // [a, (a*b)/b, b != 0, a*b, a]
+    eq         // [a == (a*b)/b, b != 0, a*b, a]
+    iszero     // [a != (a*b)/b, b != 0, a*b, a]
+
+    and        // [a != (a*b)/b & b != 0 (is_overflowed), a*b, a]
+
+    iszero         // [is_not_overflowed, a*b, a]
+    didnt_overflow // [didnt_overflow_pc, is_not_overflowed, a*b, a]
+    jumpi          // [a*b, a]
+
+    0x00 0x00 revert
+
+    didnt_overflow:
+
+    // End stack : [a*b (if didn't overflow), a]
+}
+
+#define macro MAIN() = takes(0) returns(0) {
+    0x00 calldataload 0xe0 shr        // [calldata_func_sig]
+    __FUNC_SIG(multiply) eq safe_mul jumpi    // []
+
+    0x00 0x00 revert
+
+    safe_mul:
+            0x04 calldataload      // [a]
+            0x24 calldataload      // [b,a]
+            SAFE_MUL()             // [b*a,a]
+            0x00 mstore            // [a]
+            0x20 0x00 return       // [a]
+}

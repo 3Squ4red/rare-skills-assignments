@@ -1,0 +1,67 @@
+
+/** 
+ *  SUM_ARRAY HUFF EXERCISE
+ *
+ *  
+ *  The task is to write within the `MAIN` macro below, write a functionality that takes an array of uint256 as an argument and returns the sum of all the numbers
+ *
+ *  NOTICE: The contract should revert when an unrecognized function is called
+ */
+
+#define function sumArray(uint256[]) payable returns(uint256)
+
+#define macro SUM_ARRAY() = takes (0) returns (0) {
+    // initialize i [array.length] in memory
+    0x24 calldataload                           // [length]
+    0x00 mstore                                 // []
+
+    /** another way to initialize i in memory */
+    // 0x20 0x24 0x00                              // [00, 36, 32]
+    // calldatacopy                                // [00]
+
+    // store the first element's calldata offset in memory
+    0x44 0x20 mstore                            // []
+
+    loop:
+        // get the next num in array
+        0x20 mload                              // [num_offset]
+        dup1                                    // [num_offset, num_offset]
+        calldataload                            // [num, num_offset]
+
+        // get the total sum
+        0x40 mload                              // [total_sum, num, num_offset]
+
+        // ADD!
+        add                                     // [sum, num_offset]
+
+        // store sum at mem[40]
+        0x40 mstore                             // [num_offset]
+
+        // add 32 to the num_offset
+        0x20 add                                // [next_offset]
+        0x20 mstore                             // []
+
+        // decrement i by 1
+        0x01                                    // [1]
+        0x00 mload                              // [i, 1]
+        sub                                     // [i-1]
+        dup1                                    // [i-1, i-1]
+        0x00 mstore                             // [i-1]
+
+        // loop again if there are more elements in the array
+        iszero                                  // [i-1 == 0]
+        iszero                                  // [i-1 != 0]
+        loop jumpi                              // []
+
+    0x20 0x40 return
+}
+
+#define macro MAIN() = takes(0) returns(0) {
+    0x00 calldataload 0xe0 shr                  // [calldata_func_sig]
+    __FUNC_SIG(sumArray) eq sum_array jumpi     // []
+
+    0x00 0x00 revert 
+
+    sum_array:
+        SUM_ARRAY()
+}
