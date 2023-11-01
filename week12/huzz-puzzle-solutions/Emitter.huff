@@ -17,7 +17,7 @@
     0x00 mstore              // []
     0x04 calldataload        // [first_num]
     __EVENT_HASH(Value)      // [event_sig, first_num]
-    0x20 0x00                // [mem_start, mem_end, event_sig, second_num, first_num]
+    0x20 0x00                // [mem_start, mem_end, event_sig, first_num]
     log2                     // []
 }
 
