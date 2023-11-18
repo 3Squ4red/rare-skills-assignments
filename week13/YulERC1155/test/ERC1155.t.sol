@@ -139,27 +139,6 @@ contract WrongReturnDataERC1155Recipient is ERC1155TokenReceiver {
 contract NonERC1155Recipient {}
 
 interface IERC1155 {
-    event TransferSingle(
-        address indexed _operator,
-        address indexed _from,
-        address indexed _to,
-        uint256 _id,
-        uint256 _value
-    );
-    event TransferBatch(
-        address indexed _operator,
-        address indexed _from,
-        address indexed _to,
-        uint256[] _ids,
-        uint256[] _values
-    );
-    event ApprovalForAll(
-        address indexed _owner,
-        address indexed _operator,
-        bool _approved
-    );
-    event URI(string _value, uint256 indexed _id);
-
     function safeTransferFrom(
         address _from,
         address _to,
@@ -199,6 +178,12 @@ interface IERC1155 {
         uint256 amount,
         bytes memory data
     ) external;
+
+    function setURI(uint256 id, string memory uri) external;
+
+    function getURI(uint256 id) external view returns (string memory);
+
+    function EmitURI(string memory uri, uint256 id) external;
 }
 
 contract ERC1155Test is Test, ERC1155TokenReceiver {
@@ -223,6 +208,7 @@ contract ERC1155Test is Test, ERC1155TokenReceiver {
         address indexed _operator,
         bool _approved
     );
+    event URI(string _value, uint256 indexed _id);
 
     mapping(address => mapping(uint256 => uint256)) public userMintAmounts;
     mapping(address => mapping(uint256 => uint256))
@@ -347,7 +333,7 @@ contract ERC1155Test is Test, ERC1155TokenReceiver {
         assertEq(to.operator(), address(this));
         assertEq(to.from(), from);
         assertEq(to.id(), id);
-        // assertBytesEq(to.mintData(), transferData);
+        assertEq(to.mintData(), transferData);
 
         assertEq(token.balanceOf(address(to), id), transferAmount);
         assertEq(token.balanceOf(from, id), mintAmount - transferAmount);
@@ -650,9 +636,9 @@ contract ERC1155Test is Test, ERC1155TokenReceiver {
 
         assertEq(to.batchOperator(), address(this));
         assertEq(to.batchFrom(), from);
-        assertUintArrayEq(to.batchIds(), normalizedIds);
-        assertUintArrayEq(to.batchAmounts(), normalizedTransferAmounts);
-        // assertBytesEq(to.batchData(), transferData);
+        assertEq(to.batchIds(), normalizedIds);
+        assertEq(to.batchAmounts(), normalizedTransferAmounts);
+        assertEq(to.batchData(), transferData);
 
         for (uint256 i = 0; i < normalizedIds.length; i++) {
             uint256 id = normalizedIds[i];
@@ -1005,7 +991,7 @@ contract ERC1155Test is Test, ERC1155TokenReceiver {
         assertEq(to.operator(), address(this));
         assertEq(to.from(), address(0));
         assertEq(to.id(), id);
-        // assertBytesEq(to.mintData(), mintData);
+        assertEq(to.mintData(), mintData);
     }
 
     /* -------- mint fails ---------- */
@@ -1057,6 +1043,17 @@ contract ERC1155Test is Test, ERC1155TokenReceiver {
         );
     }
 
+    /* -------- setURI/getURI ---------- */
+
+    function testSetGetURI(uint id, string memory uri) public {
+        // vm.expectEmit(true, false, false, true, address(token));
+        // emit URI(uri, id);
+
+        token.setURI(id, uri);
+
+        assertEq(token.getURI(id), uri);
+    }
+
     /* -------- helper functions ---------- */
 
     function min3(
@@ -1065,25 +1062,5 @@ contract ERC1155Test is Test, ERC1155TokenReceiver {
         uint256 c
     ) internal pure returns (uint256) {
         return a > b ? (b > c ? c : b) : (a > c ? c : a);
-    }
-
-    function assertBytesEq(bytes memory a, bytes memory b) internal virtual {
-        if (keccak256(a) != keccak256(b)) {
-            emit log("Error: a == b not satisfied [bytes]");
-            emit log_named_bytes("  Expected", b);
-            emit log_named_bytes("    Actual", a);
-            fail();
-        }
-    }
-
-    function assertUintArrayEq(
-        uint256[] memory a,
-        uint256[] memory b
-    ) internal virtual {
-        require(a.length == b.length, "LENGTH_MISMATCH");
-
-        for (uint256 i = 0; i < a.length; i++) {
-            assertEq(a[i], b[i]);
-        }
     }
 }
