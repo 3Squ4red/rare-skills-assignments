@@ -249,7 +249,7 @@ object "ERC1155" {
                 calldatacopy(0xc0, 0x64, length)
                 //round up to next multiple of 32 bytes for abi encoding
                 let slen := mul(add(div(length,0x20),1),0x20)
-                log2(0x80, add(0x40,length), 0x6bb7ff708619ba0610cba295a58592e0451dee2622938c8755667688daf3529b, id)    
+                log2(0x80, add(0x40,slen), 0x6bb7ff708619ba0610cba295a58592e0451dee2622938c8755667688daf3529b, id)    
             }
             function getURI(id) {
                 let uriOffset := getURIOffset(id)

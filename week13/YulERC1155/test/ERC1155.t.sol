@@ -1045,9 +1045,12 @@ contract ERC1155Test is Test, ERC1155TokenReceiver {
 
     /* -------- setURI/getURI ---------- */
 
-    function testSetGetURI(uint id, string memory uri) public {
-        // vm.expectEmit(true, false, false, true, address(token));
-        // emit URI(uri, id);
+    function testSetGetURI() public {
+        string memory uri = "https://example.com";
+        uint id = 343;
+
+        vm.expectEmit(true, false, false, true, address(token));
+        emit URI(uri, id);
 
         token.setURI(id, uri);
 
