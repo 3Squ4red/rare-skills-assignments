@@ -1,0 +1,6 @@
+[submodule "week15-16/StakingRewards/lib/forge-std"]
+	path = week15-16/StakingRewards/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "week15-16/TokenDistributor/lib/forge-std"]
+	path = week15-16/TokenDistributor/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
