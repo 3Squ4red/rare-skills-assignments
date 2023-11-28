@@ -1,4 +1,0 @@
-# TODO
-#select the mode to test, which can be property, assertion, overflow, exploration, optimization
-testMode: assertion
-corpusDir: corpus
